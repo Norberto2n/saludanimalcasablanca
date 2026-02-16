@@ -1,43 +1,72 @@
+/* ==========================================================
+   SALUDANIMAL CASABLANCA – STYLE.CSS (ESTABLE Y ORDENADO)
+   ----------------------------------------------------------
+   1) Reset / Base
+   2) Layout
+   3) Tipografía
+   4) Links y listas
+   5) Botones
+   6) Header (fetch en #header)
+      6.1 Wrapper + estados
+      6.2 Site-header (contenedor real)
+      6.3 Barra superior (header-top)
+      6.4 Header principal (logo + nav)
+      6.5 Nav desktop
+      6.6 Botón móvil
+      6.7 Nav móvil (desplegable robusto)
+   7) Hero
+========================================================== */
+
+
 /* =========================
-   Base / Reset suave
+   1) RESET / BASE
 ========================= */
-* { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body {
+*{ box-sizing: border-box; margin: 0; padding: 0; }
+html{ scroll-behavior: smooth; }
+
+body{
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   line-height: 1.5;
   color: #1f2937;
   background: #ffffff;
 }
 
-/* Contenedor */
-.container {
+
+/* =========================
+   2) LAYOUT
+========================= */
+.container{
   width: min(1100px, 92%);
   margin: 0 auto;
 }
 
-/* Links */
-a { color: inherit; text-decoration: none; }
-a:hover { opacity: 0.9; }
+section{ padding: 70px 0; }
 
-/* Tipografía */
-h1, h2, h3 { line-height: 1.2; }
-h1 { font-size: clamp(28px, 3vw, 44px); margin-bottom: 10px; }
-h2 { font-size: clamp(22px, 2.2vw, 32px); margin-bottom: 16px; }
-p { margin: 8px 0; }
+.horario, .testimonios{ background: #f8fafc; }
+.cta{ background: #0ea5a4; color: #ffffff; text-align: center; }
 
-/* Secciones */
-section { padding: 70px 0; }
-.hero { padding: 90px 0; }
-.horario, .testimonios { background: #f8fafc; }
-.cta { background: #0ea5a4; color: #ffffff; text-align: center; }
 
-/* Listas */
-ul { list-style: none; }
-.horario-lista li { padding: 8px 0; }
+/* =========================
+   3) TIPOGRAFÍA
+========================= */
+h1, h2, h3{ line-height: 1.2; }
+h1{ font-size: clamp(28px, 3vw, 44px); margin-bottom: 10px; }
+h2{ font-size: clamp(22px, 2.2vw, 32px); margin-bottom: 16px; }
+p{ margin: 8px 0; }
 
-/* Botones */
-.btn-primary, .btn-secondary {
+
+/* =========================
+   4) LINKS Y LISTAS
+========================= */
+a{ color: inherit; text-decoration: none; }
+a:hover{ opacity: 0.9; }
+ul{ list-style: none; }
+
+
+/* =========================
+   5) BOTONES
+========================= */
+.btn-primary, .btn-secondary{
   display: inline-block;
   padding: 12px 18px;
   border-radius: 10px;
@@ -45,15 +74,362 @@ ul { list-style: none; }
   transition: transform .15s ease, opacity .15s ease;
   border: 0;
 }
-.btn-primary {
-  background: #0ea5a4;
-  color: #ffffff;
+.btn-primary{ background: #0ea5a4; color: #ffffff; }
+.btn-secondary{ background: #ffffff; color: #0ea5a4; }
+.btn-primary:hover, .btn-secondary:hover{ transform: translateY(-1px); }
+
+
+/* =========================
+   UTILIDADES
+========================= */
+.text-center{ text-align: center; }
+
+
+/* ==========================================================
+   6) HEADER (FETCH) + ESTADOS
+   El <div id="header"> contiene el header insertado por fetch.
+   JS añade: is-top / is-scrolled / menu-open
+========================================================== */
+
+/* ---------- 6.1 Wrapper fijo (#header) ---------- */
+#header{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9999;
+  transform: translateY(0);
+  transition: transform .22s ease;
 }
-.btn-secondary {
-  background: #ffffff;
+
+/* Estados */
+#header.is-top{ transform: translateY(0); }
+#header.is-scrolled{ transform: translateY(0); }
+
+/* Si el menú móvil está abierto, no ocultes nada */
+#header.menu-open{ transform: translateY(0) !important; }
+
+
+/* ---------- 6.2 Site-header (contenedor real) ---------- */
+#header .site-header{
+  position: relative; /* ancla el desplegable móvil (top:100%) */
+  background: transparent;
+  border: none;
+  transition: background .22s ease, box-shadow .22s ease;
+}
+
+/* En scroll: header blanco */
+#header.is-scrolled .site-header{
+  background: rgba(255,255,255,0.96);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+
+/* ---------- 6.3 Barra superior (header-top) ---------- */
+/* IMPORTANTE: NO overlay aquí. Va en flujo normal para no tapar la botonera. */
+#header .header-top{
+  position: relative;
+  z-index: 1;
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* Contenedor */
+#header .header-top-container{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 8px 0;
+  font-size: 13px;
+  color: rgba(255,255,255,0.92);
+}
+
+/* Bloques */
+#header .top-left,
+#header .top-right{
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  min-width: 0;
+}
+
+#header .top-right{
+  margin-left: auto;
+  justify-content: flex-end;
+  text-align: right;
+}
+
+/* Items */
+#header .top-item{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  color: inherit;
+  text-decoration: none;
+  opacity: 0.95;
+}
+
+#header a.top-item{ cursor: pointer; }
+#header a.top-item:hover{ opacity: 0.82; }
+
+/* Iconos blindados */
+#header .top-icon{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  flex: 0 0 auto;
+  line-height: 1;
+}
+
+#header .top-icon svg{
+  width: 16px;
+  height: 16px;
+  display: block;
+  fill: currentColor;
+}
+
+
+#header .top-icon.material-symbols-outlined{
+  font-size: 18px;
+ 
+  font-variation-settings:
+    "FILL" 0,
+    "wght" 300,
+    "GRAD" 0,
+    "opsz" 20;
+}
+
+
+
+
+
+/* ---------- 6.4 Header principal (logo + nav) ---------- */
+/* Wrapper opcional del HTML nuevo */
+#header .header-main{
+  position: relative;
+  z-index: 2; /* por encima de header-top si hiciera falta */
+}
+
+/* Contenedor */
+#header .header-container{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 50px;
+  padding: 22px 0;
+  margin-left: 100px; /* tu margen en desktop */
+  position: relative;
+  z-index: 2;
+}
+
+/* Logo */
+#header .logo{
+  display: flex;
+  align-items: center;
+}
+
+#header .logo img{
+  height: 90px;
+  width: auto;
+  display: block;
+  transition: height .25s ease;
+  filter: drop-shadow(0 6px 16px rgba(0,0,0,0.45)); /* visible sobre hero */
+}
+
+#header.is-scrolled .logo img{
+  height: 52px;
+  filter: none;
+}
+
+
+/* ---------- 6.5 Nav desktop (botonera) ---------- */
+#header .main-nav{
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  position: relative;
+  z-index: 3; /* por encima de todo dentro del header */
+}
+
+#header .nav-inner{
+  display: flex;
+  align-items: center;
+}
+
+/* Lista horizontal */
+#header .main-nav ul{
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Links */
+#header .main-nav a{
+  font-weight: 600;
+  font-size: 16px;
+  padding: 6px 8px;
+  border-radius: 8px;
+  color: rgba(255,255,255,0.95);
+  transition: background .2s ease, color .2s ease, opacity .2s ease;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.55); /* contraste sobre foto */
+}
+
+#header .main-nav a:hover{
+  background: rgba(255,255,255,0.10);
+  opacity: 0.95;
+}
+
+#header .main-nav a.active{
+  background: rgba(255,255,255,0.92);
+  color: #0ea5a4;
+  opacity: 1;
+  text-shadow: none;
+}
+
+/* Scrolled: links oscuros */
+#header.is-scrolled .main-nav a{
+  color: #111827;
+  text-shadow: none;
+}
+#header.is-scrolled .main-nav a:hover{
+  background: rgba(14,165,164,0.10);
+  opacity: 1;
+}
+#header.is-scrolled .main-nav a.active{
+  background: rgba(14,165,164,0.14);
   color: #0ea5a4;
 }
-.btn-primary:hover, .btn-secondary:hover { transform: translateY(-1px); }
 
-/* Utilidades */
-.text-center { text-align: center; }
+
+/* ---------- 6.6 Botón móvil ---------- */
+#header .menu-toggle{
+  display: none; /* solo móvil */
+  font-size: 22px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.35);
+  background: rgba(255,255,255,0.10);
+  color: #fff;
+  cursor: pointer;
+  position: relative;
+  z-index: 10;
+}
+
+#header.is-scrolled .menu-toggle{
+  color: #111827;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+}
+
+
+/* ---------- 6.7 Responsive móvil (menú desplegable robusto) ---------- */
+@media (max-width: 900px){
+
+  /* Barra superior en columna */
+  #header .header-top-container{
+    flex-direction: column;
+    gap: 6px;
+    text-align: center;
+  }
+
+  #header .top-left,
+  #header .top-right{
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-left: 0;
+  }
+
+  /* Header principal */
+  #header .header-container{
+    margin-left: 0;
+    justify-content: space-between;
+    gap: 14px;
+  }
+
+  #header .menu-toggle{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Menú desplegable debajo del header */
+  #header .main-nav{
+    display: none; /* se activa con .active */
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    padding: 16px;
+    background: rgba(255,255,255,0.96);
+    border-bottom: 1px solid #e5e7eb;
+    z-index: 99999;
+  }
+
+  #header .main-nav.active{
+    display: block;
+  }
+
+  #header .nav-inner{ width: 100%; }
+
+  #header .main-nav ul{
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  #header .main-nav ul a{
+    display: block;
+    background: #f8fafc;
+    color: #111827;
+    padding: 10px 12px;
+    border-radius: 10px;
+    text-shadow: none;
+  }
+
+  #header .main-nav ul a.active{
+    background: #0ea5a4;
+    color: #ffffff;
+  }
+}
+
+
+/* ==========================================================
+   7) HERO – 100vh con imagen + overlay
+========================================================== */
+.hero{
+  height: 100vh;
+  padding: 0 !important;
+  margin: 0 !important;
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-image: url("../img/hero/inicio.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Overlay suave */
+.hero::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.25);
+}
+
+/* Contenido hero */
+.hero .container{
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: #ffffff;
+  padding-top: 90px; /* separación para que no quede bajo el header */
+}

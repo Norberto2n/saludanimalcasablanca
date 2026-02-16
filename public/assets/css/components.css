@@ -1,25 +1,29 @@
 /* =========================
-   HEADER
+   HEADER (sobre HERO)
+   - NO sticky / NO fondo blanco
+   - Respeta el header fijo del style.css (#header ...)
 ========================= */
+
+/* Importante: no pisar el layout del style.css */
 .site-header {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  background: rgba(255,255,255,0.92);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid #e5e7eb;
+  position: static;
+  background: transparent;
+  backdrop-filter: none;
+  border-bottom: none;
 }
 
+/* Contenedor */
 .header-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 18px;
-  padding: 14px 0;
+  padding: 0; /* el padding lo controla style.css */
 }
 
+/* Logo */
 .logo img {
-  height: 44px;
+  height: 58px;
   width: auto;
   display: block;
 }
@@ -30,8 +34,9 @@
   font-size: 22px;
   padding: 10px 12px;
   border-radius: 10px;
-  border: 1px solid #e5e7eb;
-  background: #ffffff;
+  border: 1px solid rgba(255,255,255,0.35);
+  background: rgba(255,255,255,0.10);
+  color: #fff;
   cursor: pointer;
 }
 
@@ -45,48 +50,50 @@
 .main-nav ul {
   display: flex;
   align-items: center;
-  gap: 18px;
+  gap: 30px; /* como en tu header sobre hero */
 }
 
 .main-nav a {
+  color: rgba(255,255,255,0.95);
   font-weight: 600;
-  padding: 8px 14px;
-  border-radius: 999px;
-  transition: all 0.2s ease;
-  position: relative;
+  font-size: 18px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  transition: opacity .2s ease, background .2s ease;
 }
 
-/* Hover */
+/* Hover suave (sin pastilla verde) */
 .main-nav a:hover {
-  background: rgba(14, 165, 164, 0.12);
-  box-shadow: 0 6px 18px rgba(14, 165, 164, 0.25);
+  opacity: 0.75;
+  background: rgba(255,255,255,0.08);
 }
 
-/* Activo (cuando esté en esa página) */
+/* Activo: fondo blanco + texto teal (para que se vea sobre la foto) */
 .main-nav a.active {
-  background: #0ea5a4;
-  color: #ffffff;
-  box-shadow: 0 8px 22px rgba(14, 165, 164, 0.35);
-}
-
-
-.header-cta {
-  margin-left: 8px;
+  background: rgba(255,255,255,0.92);
+  color: #0ea5a4;
+  opacity: 1;
 }
 
 /* Responsive menú */
 @media (max-width: 900px) {
-  .menu-toggle { display: inline-flex; align-items: center; justify-content: center; }
+  .menu-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
 
   .main-nav {
     display: none;
     position: absolute;
     left: 0;
     right: 0;
-    top: 72px;
-    background: #ffffff;
+    top: 86px;
+
+    background: rgba(255,255,255,0.96);
     border-bottom: 1px solid #e5e7eb;
     padding: 16px;
+
     flex-direction: column;
     align-items: stretch;
     gap: 14px;
@@ -105,11 +112,12 @@
     padding: 10px 12px;
     border-radius: 10px;
     background: #f8fafc;
+    color: #111827;
   }
 
-  .header-cta {
-    width: 100%;
-    text-align: center;
+  .main-nav ul a.active {
+    background: #0ea5a4;
+    color: #ffffff;
   }
 }
 

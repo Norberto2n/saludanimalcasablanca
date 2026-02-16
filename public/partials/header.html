@@ -1,33 +1,94 @@
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@400" />
 <header class="site-header">
-    <div class="container header-container">
 
-        <!-- LOGO -->
-        <div class="logo">
-            <a href="index.html">
-                <img src="assets/img/logo/logo.svg" alt="SaludAnimal Casablanca">
-            </a>
+  <!-- =========================
+       BARRA INFO SUPERIOR
+  ========================== -->
+  <div class="header-top" role="banner">
+    <div class="container header-top-container">
+
+        <!-- IZQUIERDA -->
+        <div class="top-left">
+
+          <!-- Dirección -->
+         
+
+            <a class="top-item">
+            <span class="top-icon material-symbols-outlined" aria-hidden="true">location_pin</span>
+            Picture Of The Day
+          </a>
+
+        
+
+
+
+
+          <!-- Enlace extra -->
+          <a class="top-item" href="picture-of-the-day.html">
+            <span class="top-icon material-symbols-outlined" aria-hidden="true">photo_camera</span>
+            Picture Of The Day
+          </a>
+
         </div>
 
-        <!-- BOTÓN MENÚ MÓVIL -->
-        <button class="menu-toggle" id="menuToggle">
-            ☰
-        </button>
 
-        <!-- NAVEGACIÓN -->
-        <nav class="main-nav" id="mainNav">
-            <ul>
-                <li><a href="index.html">Inicio</a></li>
-                <li><a href="sobre_nosotros.html">Sobre nosotros</a></li>
-                <li><a href="servicios.html">Servicios</a></li>
-                <li><a href="instalaciones.html">Instalaciones</a></li>
-                <li><a href="donde-estamos.html">Dónde estamos</a></li>
-                <li><a href="contacto.html">Contacto</a></li>
-            </ul>
+      <!-- DERECHA -->
+      <div class="top-right">
+        <a class="top-item" href="tel:+34976568622">
+          <span class="top-icon" aria-hidden="true">📞</span>
+          (+34) 976 56 86 22
+        </a>
 
-            <a href="contacto.html" class="btn-primary header-cta">
-                Pedir cita
-            </a>
-        </nav>
+        <a class="top-item" href="mailto:info@saludanimalcasablanca.es">
+          <span class="top-icon" aria-hidden="true">✉</span>
+          info@saludanimalcasablanca.es
+        </a>
+      </div>
 
     </div>
+  </div>
+
+
+  <!-- =========================
+       HEADER PRINCIPAL
+  ========================== -->
+  <div class="header-main">
+    <div class="container header-container">
+
+      <!-- LOGO -->
+      <div class="logo">
+        <a href="index.html" aria-label="Ir a inicio">
+          <img src="/assets/img/logo/logo.png" alt="SaludAnimal Casablanca">
+        </a>
+      </div>
+
+      <!-- BOTÓN MENÚ MÓVIL -->
+      <button
+        class="menu-toggle"
+        id="menuToggle"
+        aria-label="Abrir menú"
+        aria-controls="mainNav"
+        aria-expanded="false"
+        type="button"
+      >
+        ☰
+      </button>
+
+      <!-- NAVEGACIÓN -->
+      <nav class="main-nav" id="mainNav" aria-label="Navegación principal">
+        <div class="nav-inner">
+          <ul>
+            <li><a href="index.html"><span>Inicio</span></a></li>
+            <li><a href="quienes_somos.html"><span>Quienes Somos</span></a></li>
+            <li><a href="instalaciones.html"><span>Instalaciones</span></a></li>
+            <li><a href="servicios.html"><span>Servicios</span></a></li>
+            <li><a href="galeria.html"><span>Galería</span></a></li>
+            <li><a href="contacto.html"><span>Contacto</span></a></li>
+          </ul>
+        </div>
+      </nav>
+
+    </div>
+  </div>
+
 </header>
