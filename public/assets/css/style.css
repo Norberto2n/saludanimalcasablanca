@@ -141,10 +141,17 @@ ul{ list-style: none; }
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding: 8px 0;
+  padding: 9px 0;
+  max-width: none;
+  width: 100%;
+  padding-left: 150px;
+  padding-right: 150px;
   font-size: 13px;
   color: rgba(255,255,255,0.92);
 }
+
+
+
 
 /* Bloques */
 #header .top-left,
@@ -159,7 +166,11 @@ ul{ list-style: none; }
   margin-left: auto;
   justify-content: flex-end;
   text-align: right;
+  
 }
+
+
+
 
 /* Items */
 #header .top-item{
@@ -180,21 +191,15 @@ ul{ list-style: none; }
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: #ffffff;
+  color: #0ea5a4;
   flex: 0 0 auto;
   line-height: 1;
 }
 
-#header .top-icon svg{
-  width: 16px;
-  height: 16px;
-  display: block;
-  fill: currentColor;
-}
 
 
 #header .top-icon.material-symbols-outlined{
-  font-size: 18px;
+  font-size: 16px;
  
   font-variation-settings:
     "FILL" 0,
@@ -219,7 +224,7 @@ ul{ list-style: none; }
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  gap: 50px;
+  gap: 20px;
   padding: 22px 0;
   margin-left: 100px; /* tu margen en desktop */
   position: relative;
@@ -233,7 +238,7 @@ ul{ list-style: none; }
 }
 
 #header .logo img{
-  height: 90px;
+  height: 100px;
   width: auto;
   display: block;
   transition: height .25s ease;
@@ -252,55 +257,90 @@ ul{ list-style: none; }
   border: none;
   box-shadow: none;
   position: relative;
-  z-index: 3; /* por encima de todo dentro del header */
+  z-index: 3;
 }
 
-#header .nav-inner{
-  display: flex;
-  align-items: center;
-}
-
-/* Lista horizontal */
 #header .main-nav ul{
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 14px;
 }
 
-/* Links */
+/* Links “normales” por defecto */
 #header .main-nav a{
-  font-weight: 600;
-  font-size: 16px;
-  padding: 6px 8px;
-  border-radius: 8px;
-  color: rgba(255,255,255,0.95);
-  transition: background .2s ease, color .2s ease, opacity .2s ease;
-  text-shadow: 0 2px 12px rgba(0,0,0,0.55); /* contraste sobre foto */
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  font-weight: 700;
+  font-size: 18px;
+  padding: 10px 16px;
+
+  color: rgba(255,255,255,0.95);       /* arriba sobre hero */
+  text-shadow: 0 2px 12px rgba(0,0,0,0.45);
+  background: transparent;
+
+  transition: color .35s ease, text-shadow .35s ease;
+  isolation: isolate;
 }
 
+/* Trapecio invertido (APARECE SOLO EN HOVER/ACTIVE) */
+#header .main-nav a::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+
+  background: rgba(255,255,255,0.98);
+
+  /* Trapecio invertido suave */
+  clip-path: polygon(6% 0%, 94% 0%, 90% 100%, 10% 100%);
+
+  /* Redondeo */
+  border-radius: 16px;
+
+  /* Animación “nace del centro” */
+  transform: scale(0.15);
+  transform-origin: 50% 50%;
+  opacity: 0;
+
+  transition: transform .45s cubic-bezier(.2,.85,.2,1), opacity .28s ease;
+}
+
+/* HOVER: aparece trapecio + texto azul */
 #header .main-nav a:hover{
-  background: rgba(255,255,255,0.10);
-  opacity: 0.95;
-}
-
-#header .main-nav a.active{
-  background: rgba(255,255,255,0.92);
-  color: #0ea5a4;
-  opacity: 1;
+  color: #0ea5a4;       /* azul/verde */
   text-shadow: none;
 }
 
-/* Scrolled: links oscuros */
+#header .main-nav a:hover::before{
+  transform: scale(1);
+  opacity: 1;
+}
+
+/* ACTIVE: se queda visible */
+#header .main-nav a.active{
+  color: #0ea5a4;
+  text-shadow: none;
+}
+
+#header .main-nav a.active::before{
+  transform: scale(1);
+  opacity: 1;
+}
+
+/* Estado scrolled: texto oscuro por defecto, hover/active igual */
 #header.is-scrolled .main-nav a{
   color: #111827;
   text-shadow: none;
 }
+
 #header.is-scrolled .main-nav a:hover{
-  background: rgba(14,165,164,0.10);
-  opacity: 1;
+  color: #0ea5a4;
 }
+
 #header.is-scrolled .main-nav a.active{
-  background: rgba(14,165,164,0.14);
   color: #0ea5a4;
 }
 
