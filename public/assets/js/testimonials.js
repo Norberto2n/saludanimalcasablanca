@@ -2,67 +2,132 @@ document.addEventListener("DOMContentLoaded", () => {
   const slider = document.getElementById("testimonialsSlider");
   if (!slider) return;
 
+  const track = slider.querySelector(".slides");
   const slides = Array.from(slider.querySelectorAll(".slide"));
   const prevBtn = slider.querySelector(".slider-btn.prev");
   const nextBtn = slider.querySelector(".slider-btn.next");
   const dotsWrap = slider.querySelector(".slider-dots");
 
-  if (slides.length === 0) return;
+  if (!track || slides.length === 0) return;
 
-  let current = slides.findIndex(s => s.classList.contains("active"));
-  if (current < 0) current = 0;
+  let current = 0;
+  let dots = [];
+  let timer = null;
 
-  // Si solo hay 1 slide, ocultamos controles
-  if (slides.length === 1) {
-    if (prevBtn) prevBtn.style.display = "none";
-    if (nextBtn) nextBtn.style.display = "none";
-    if (dotsWrap) dotsWrap.style.display = "none";
-    slides[0].classList.add("active");
-    return;
+  const INTERVAL_MS = 5000;
+
+  function slidesPerView() {
+    return window.innerWidth <= 900 ? 1 : 2;
   }
 
-  // Crear dots
-  const dots = slides.map((_, i) => {
-    const b = document.createElement("button");
-    b.type = "button";
-    b.className = "slider-dot" + (i === current ? " active" : "");
-    b.setAttribute("aria-label", `Ir a opinión ${i + 1}`);
-    b.addEventListener("click", () => {
-      goTo(i);
-      restartAuto();
-    });
-    dotsWrap.appendChild(b);
-    return b;
-  });
+  function maxIndex() {
+    // número de "posiciones" posibles
+    return Math.max(0, slides.length - slidesPerView());
+  }
+
+  function getGapPx() {
+    // gap real del track (flex-gap)
+    const cs = window.getComputedStyle(track);
+    const gap = parseFloat(cs.columnGap || cs.gap || "0");
+    return Number.isFinite(gap) ? gap : 0;
+  }
+
+  function stepPx() {
+    // paso = ancho real de un slide + gap
+    const w = slides[0].getBoundingClientRect().width;
+    return w + getGapPx();
+  }
 
   function render() {
-    slides.forEach((s, i) => s.classList.toggle("active", i === current));
-    dots.forEach((d, i) => d.classList.toggle("active", i === current));
+    const x = current * stepPx();
+    track.style.transform = `translateX(-${x}px)`;
+    updateDots();
   }
 
   function goTo(index) {
-    current = (index + slides.length) % slides.length;
+    current = Math.max(0, Math.min(index, maxIndex()));
     render();
   }
 
-  function next() { goTo(current + 1); }
-  function prev() { goTo(current - 1); }
+  function next() {
+    current = (current >= maxIndex()) ? 0 : current + 1;
+    render();
+  }
 
-  if (nextBtn) nextBtn.addEventListener("click", () => { next(); restartAuto(); });
-  if (prevBtn) prevBtn.addEventListener("click", () => { prev(); restartAuto(); });
+  function prev() {
+    current = (current <= 0) ? maxIndex() : current - 1;
+    render();
+  }
 
-  // Auto-play + pausa al pasar el ratón
-  const INTERVAL_MS = 4500;
-  let timer = setInterval(next, INTERVAL_MS);
+  /* ===== DOTS ===== */
+  function buildDots() {
+    if (!dotsWrap) return;
 
-  function restartAuto() {
-    clearInterval(timer);
+    dotsWrap.innerHTML = "";
+    dots = [];
+
+    // cantidad de posiciones posibles (incluye 0)
+    const count = maxIndex() + 1;
+
+    for (let i = 0; i < count; i++) {
+      const b = document.createElement("button");
+      b.className = "slider-dot";
+      b.type = "button";
+      b.setAttribute("aria-label", `Ir al testimonio ${i + 1}`);
+      b.addEventListener("click", () => {
+        goTo(i);
+        restartAuto();
+      });
+      dotsWrap.appendChild(b);
+      dots.push(b);
+    }
+
+    updateDots();
+  }
+
+  function updateDots() {
+    if (!dots.length) return;
+    dots.forEach((d, i) => d.classList.toggle("active", i === current));
+  }
+
+  /* ===== AUTOPLAY ===== */
+  function startAuto() {
+    stopAuto();
     timer = setInterval(next, INTERVAL_MS);
   }
 
-  slider.addEventListener("mouseenter", () => clearInterval(timer));
-  slider.addEventListener("mouseleave", restartAuto);
+  function stopAuto() {
+    if (timer) clearInterval(timer);
+    timer = null;
+  }
 
-  // Inicial
+  function restartAuto() {
+    startAuto();
+  }
+
+  /* ===== EVENTS ===== */
+  nextBtn && nextBtn.addEventListener("click", () => { next(); restartAuto(); });
+  prevBtn && prevBtn.addEventListener("click", () => { prev(); restartAuto(); });
+
+  slider.addEventListener("mouseenter", stopAuto);
+  slider.addEventListener("mouseleave", startAuto);
+
+  // Si cambias de 2->1 (o al revés), recalculamos todo
+  let lastSPV = slidesPerView();
+  window.addEventListener("resize", () => {
+    const spv = slidesPerView();
+    // reajusta current dentro del nuevo rango
+    current = Math.min(current, Math.max(0, slides.length - spv));
+    // si cambió el modo (1/2 visibles), reconstruye dots
+    if (spv !== lastSPV) {
+      lastSPV = spv;
+      buildDots();
+    }
+    render();
+  });
+
+  // Init
+  buildDots();
   render();
+  startAuto();
 });

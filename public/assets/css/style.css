@@ -11,9 +11,9 @@
       6.2 Site-header (contenedor real)
       6.3 Barra superior (header-top)
       6.4 Header principal (logo + nav)
-      6.5 Nav desktop
+      6.5 Nav desktop (PawFriends hover)
       6.6 Botón móvil
-      6.7 Nav móvil (desplegable robusto)
+      6.7 Nav móvil
    7) Hero
 ========================================================== */
 
@@ -87,32 +87,109 @@ ul{ list-style: none; }
 
 /* ==========================================================
    6) HEADER (FETCH) + ESTADOS
-   El <div id="header"> contiene el header insertado por fetch.
-   JS añade: is-top / is-scrolled / menu-open
 ========================================================== */
 
-/* ---------- 6.1 Wrapper fijo (#header) ---------- */
+/* ---------- 6.1 Wrapper (#header) con 2 modos: normal / sticky ---------- */
 #header{
-  position: fixed;
+  position: absolute;   /* ✅ NORMAL: se va con la página */
   top: 0;
   left: 0;
   width: 100%;
   z-index: 9999;
+
   transform: translateY(0);
-  transition: transform .22s ease;
+  opacity: 1;
+
+  transition: transform .85s ease, opacity .45s ease;
 }
 
-/* Estados */
-#header.is-top{ transform: translateY(0); }
-#header.is-scrolled{ transform: translateY(0); }
+/* ✅ STICKY: cuando pasas 500px, lo ponemos fijo */
+#header.is-sticky{
+  position: fixed;
+  transform: translateY(-110%); /* entra desde arriba */
+  opacity: 0;
+}
+
+/* En modo sticky la botonera es más estrecha */
+#header.is-sticky .header-container{
+  padding: 8px 0;   /* antes 22px */
+  
+}
+
+/* Línea fina negra debajo cuando es sticky */
+#header.is-sticky .site-header{
+  border-bottom: 1px solid rgba(241, 241, 241, 0.8);
+}
+
+
+
+/* cuando está activo (se muestra) */
+#header.is-sticky.is-sticky-show{
+  transform: translateY(0);
+  opacity: 1;
+}
 
 /* Si el menú móvil está abierto, no ocultes nada */
-#header.menu-open{ transform: translateY(0) !important; }
+#header.menu-open{
+  position: fixed !important;
+  transform: translateY(0) !important;
+  opacity: 1 !important;
+}
+
+/* En sticky: oculta la barra superior y deja solo logo + nav */
+#header.is-sticky .header-top{
+  display: none;
+}
+
+/* En sticky: fondo blanco y sombra (si quieres) */
+#header.is-sticky .site-header{
+  background: rgba(255, 255, 255, 0.96);
+  
+}
+#header.is-sticky .logo img{
+  height: 65px; /* antes 100px */
+  transition: height .35s ease;
+}
+
+
+/* ===== STICKY: normal negro / hover+active blanco con “gota” azul ===== */
+
+/* Normal (sticky): texto negro, sin fondo */
+#header.is-sticky .main-nav a{
+  background: transparent;
+  color: #111827;
+  text-shadow: none;
+}
+
+/* La “gota” en sticky debe ser azul (la capa pf-hover) */
+#header.is-sticky .main-nav a .pf-hover{
+  background: #0ea5a4;                /* azul */
+ 
+}
+
+/* Hover: texto blanco */
+#header.is-sticky .main-nav a:hover{
+  color: #ffffff;
+}
+
+/* Active: texto blanco */
+#header.is-sticky .main-nav a.active{
+  color: #ffffff;
+}
+
+/* Si quieres que en hover/active no haya ningún halo negro del texto */
+#header.is-sticky .main-nav a:hover,
+#header.is-sticky .main-nav a.active{
+  text-shadow: none;
+}
+
+
+
 
 
 /* ---------- 6.2 Site-header (contenedor real) ---------- */
 #header .site-header{
-  position: relative; /* ancla el desplegable móvil (top:100%) */
+  position: relative;
   background: transparent;
   border: none;
   transition: background .22s ease, box-shadow .22s ease;
@@ -126,7 +203,6 @@ ul{ list-style: none; }
 
 
 /* ---------- 6.3 Barra superior (header-top) ---------- */
-/* IMPORTANTE: NO overlay aquí. Va en flujo normal para no tapar la botonera. */
 #header .header-top{
   position: relative;
   z-index: 1;
@@ -150,9 +226,6 @@ ul{ list-style: none; }
   color: rgba(255,255,255,0.92);
 }
 
-
-
-
 /* Bloques */
 #header .top-left,
 #header .top-right{
@@ -166,11 +239,7 @@ ul{ list-style: none; }
   margin-left: auto;
   justify-content: flex-end;
   text-align: right;
-  
 }
-
-
-
 
 /* Items */
 #header .top-item{
@@ -186,7 +255,7 @@ ul{ list-style: none; }
 #header a.top-item{ cursor: pointer; }
 #header a.top-item:hover{ opacity: 0.82; }
 
-/* Iconos blindados */
+/* Iconos */
 #header .top-icon{
   display: inline-flex;
   align-items: center;
@@ -196,11 +265,8 @@ ul{ list-style: none; }
   line-height: 1;
 }
 
-
-
 #header .top-icon.material-symbols-outlined{
   font-size: 16px;
- 
   font-variation-settings:
     "FILL" 0,
     "wght" 300,
@@ -209,24 +275,19 @@ ul{ list-style: none; }
 }
 
 
-
-
-
 /* ---------- 6.4 Header principal (logo + nav) ---------- */
-/* Wrapper opcional del HTML nuevo */
 #header .header-main{
   position: relative;
-  z-index: 2; /* por encima de header-top si hiciera falta */
+  z-index: 2;
 }
 
-/* Contenedor */
 #header .header-container{
   display: flex;
   align-items: center;
   justify-content: flex-start;
   gap: 20px;
   padding: 22px 0;
-  margin-left: 100px; /* tu margen en desktop */
+  margin-left: 100px;
   position: relative;
   z-index: 2;
 }
@@ -242,7 +303,7 @@ ul{ list-style: none; }
   width: auto;
   display: block;
   transition: height .25s ease;
-  filter: drop-shadow(0 6px 16px rgba(0,0,0,0.45)); /* visible sobre hero */
+  
 }
 
 #header.is-scrolled .logo img{
@@ -251,7 +312,7 @@ ul{ list-style: none; }
 }
 
 
-/* ---------- 6.5 Nav desktop (botonera) ---------- */
+/* ---------- 6.5 Nav desktop (RECTÁNGULO “GOTA” limpio) ---------- */
 #header .main-nav{
   background: transparent;
   border: none;
@@ -260,94 +321,164 @@ ul{ list-style: none; }
   z-index: 3;
 }
 
+#header .nav-inner{
+  display: flex;
+  align-items: center;
+}
+
 #header .main-nav ul{
   display: flex;
   align-items: center;
   gap: 14px;
 }
 
-/* Links “normales” por defecto */
+/* Evita que tu regla global a:hover{opacity:.9} afecte aquí */
+#header .main-nav a:hover{ opacity: 1 !important; }
+
+/* Link base */
 #header .main-nav a{
   position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
 
+  padding: 10px 16px;
   font-weight: 700;
   font-size: 18px;
-  padding: 10px 16px;
+  line-height: 1;
 
-  color: rgba(255,255,255,0.95);       /* arriba sobre hero */
-  text-shadow: 0 2px 12px rgba(0,0,0,0.45);
+  color: rgba(255,255,255,0.96);
+  
   background: transparent;
 
-  transition: color .35s ease, text-shadow .35s ease;
+  transition: color .30s ease, text-shadow .30s ease;
   isolation: isolate;
+  overflow: visible; /* el “gota” puede sobresalir */
 }
 
-/* Trapecio invertido (APARECE SOLO EN HOVER/ACTIVE) */
-#header .main-nav a::before{
-  content: "";
+/* Texto arriba siempre */
+#header .main-nav a > span{
+  position: relative;
+  z-index: 2;
+  display: inline-block;
+}
+
+/* ✅ EFECTO ÚNICO: rectángulo con animación tipo gota */
+#header .main-nav a .pf-hover{
   position: absolute;
-  inset: 0;
-  z-index: -1;
+  left: 50%;
+  top: 50%;
 
-  background: rgba(255,255,255,0.98);
+  height: 36px;
+  width: calc(100% + 20px);
 
-  /* Trapecio invertido suave */
-  clip-path: polygon(6% 0%, 94% 0%, 90% 100%, 10% 100%);
+  background: #ffffff;
+  border-radius: 5px; /* rectángulo suave */
 
-  /* Redondeo */
-  border-radius: 16px;
-
-  /* Animación “nace del centro” */
-  transform: scale(0.15);
-  transform-origin: 50% 50%;
+  /* “nace” desde el centro como gota */
+  transform: translate(-50%, -50%) scale(0.15);
   opacity: 0;
+  visibility: hidden;
 
-  transition: transform .45s cubic-bezier(.2,.85,.2,1), opacity .28s ease;
+  z-index: 1;
+  pointer-events: none;
+
+  
+
+  /* gota: suave y lenta */
+  transition:
+    transform 820ms cubic-bezier(.16, 1, .3, 1),
+    opacity 320ms ease,
+    visibility 0s linear 320ms;
 }
 
-/* HOVER: aparece trapecio + texto azul */
-#header .main-nav a:hover{
-  color: #0ea5a4;       /* azul/verde */
-  text-shadow: none;
+/* Suaviza aún más el “gota” con blur SOLO al inicio (sin sombras raras) */
+#header .main-nav a .pf-hover{
+  filter: blur(1.5px);
+}
+#header .main-nav a:hover .pf-hover,
+#header .main-nav a.active .pf-hover{
+  filter: blur(0px);
 }
 
-#header .main-nav a:hover::before{
-  transform: scale(1);
+/* Hover/Active: aparece */
+#header .main-nav a:hover .pf-hover,
+#header .main-nav a.active .pf-hover{
+  transform: translate(-50%, -50%) scale(1);
   opacity: 1;
+  visibility: visible;
+  transition:
+    transform 820ms cubic-bezier(.16, 1, .3, 1),
+    opacity 320ms ease,
+    visibility 0s;
 }
 
-/* ACTIVE: se queda visible */
+/* 🔥 Apaga por completo las 3 piezas si el JS las mete dentro */
+#header .main-nav a .pf-hover-left,
+#header .main-nav a .pf-hover-right,
+#header .main-nav a .pf-hover-middle{
+  display: none !important;
+}
+
+/* Texto al hover/active */
+#header .main-nav a:hover,
 #header .main-nav a.active{
   color: #0ea5a4;
   text-shadow: none;
 }
 
-#header .main-nav a.active::before{
-  transform: scale(1);
-  opacity: 1;
-}
 
-/* Estado scrolled: texto oscuro por defecto, hover/active igual */
-#header.is-scrolled .main-nav a{
-  color: #111827;
-  text-shadow: none;
-}
 
-#header.is-scrolled .main-nav a:hover{
-  color: #0ea5a4;
-}
-
+#header.is-scrolled .main-nav a:hover,
 #header.is-scrolled .main-nav a.active{
   color: #0ea5a4;
 }
 
+/* === OVERRIDE: recuperar trapecio invertido (sin romper letras) === */
+
+/* El <a> solo recorta un poco, no lo convierte en píldora */
+#header .main-nav a{
+  border-radius: 6px;     /* antes 14px -> demasiado redondo */
+}
+
+/* Hover: menos redondo y con sensación de trapecio */
+#header .main-nav a .pf-hover{
+  height: 32px;                        /* un pelín más alto */
+  width: calc(92% );            /* un pelín más ancho */
+  
+}
+
+/* Piezas laterales: menos redondas (para que se lea trapecio, no cápsula) */
+#header .main-nav a .pf-hover-left{
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+#header .main-nav a .pf-hover-right{
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+
+/* Centro: menos redondo */
+#header .main-nav a .pf-hover-middle{
+  border-radius: 6px;     /* antes 16px -> cápsula */
+}
+
+/* Truco clave: ligero “cierre” inferior (sensación trapecio invertido) */
+#header .main-nav a:hover .pf-hover,
+#header .main-nav a.active .pf-hover{
+  transform: translate(-50%, -50%) scaleX(1) scaleY(1) skewX(-16deg);
+}
+
+/* Y al aparecer desde el centro también le damos ese skew suave */
+#header .main-nav a .pf-hover{
+  transform: translate(-50%, -50%) scaleX(0.08) scaleY(0.86) skewX(-16deg);
+}
+
+
 
 /* ---------- 6.6 Botón móvil ---------- */
 #header .menu-toggle{
-  display: none; /* solo móvil */
+  display: none;
   font-size: 22px;
   padding: 10px 12px;
   border-radius: 10px;
@@ -366,10 +497,9 @@ ul{ list-style: none; }
 }
 
 
-/* ---------- 6.7 Responsive móvil (menú desplegable robusto) ---------- */
+/* ---------- 6.7 Responsive móvil ---------- */
 @media (max-width: 900px){
 
-  /* Barra superior en columna */
   #header .header-top-container{
     flex-direction: column;
     gap: 6px;
@@ -384,7 +514,6 @@ ul{ list-style: none; }
     margin-left: 0;
   }
 
-  /* Header principal */
   #header .header-container{
     margin-left: 0;
     justify-content: space-between;
@@ -397,9 +526,8 @@ ul{ list-style: none; }
     justify-content: center;
   }
 
-  /* Menú desplegable debajo del header */
   #header .main-nav{
-    display: none; /* se activa con .active */
+    display: none;
     position: absolute;
     left: 0;
     right: 0;
@@ -431,25 +559,28 @@ ul{ list-style: none; }
     text-shadow: none;
   }
 
+  /* ✅ En móvil: desactivo el hover SVG para que no haga cosas raras */
+  #header .main-nav ul a .pf-hover{
+    display: none !important;
+  }
+
   #header .main-nav ul a.active{
     background: #0ea5a4;
     color: #ffffff;
   }
 }
-
-
 /* ==========================================================
-   7) HERO – 100vh con imagen + overlay
+   7) HERO – Responsive
 ========================================================== */
 .hero{
-  height: 100vh;
-  padding: 0 !important;
-  margin: 0 !important;
+  min-height: 100vh;
+  padding: 0;
+  margin: 0;
   position: relative;
 
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
 
   background-image: url("../img/hero/inicio.jpg");
   background-size: cover;
@@ -457,7 +588,6 @@ ul{ list-style: none; }
   background-repeat: no-repeat;
 }
 
-/* Overlay suave */
 .hero::before{
   content: "";
   position: absolute;
@@ -465,11 +595,118 @@ ul{ list-style: none; }
   background: rgba(0,0,0,0.25);
 }
 
-/* Contenido hero */
 .hero .container{
   position: relative;
   z-index: 2;
-  text-align: center;
+  text-align: left;
   color: #ffffff;
-  padding-top: 90px; /* separación para que no quede bajo el header */
+
+  /* ✅ responsive: padding y margen con clamp */
+  max-width: 700px;
+  padding-top: clamp(70px, 10vh, 110px);
+  margin-left: clamp(16px, 8vw, 300px);
+  margin-right: 16px;
+}
+
+/* Imagen hero */
+.hero-image{
+  max-width: min(340px, 85vw);
+  width: 100%;
+  margin: 28px 0 0 0;
+  display: block;
+}
+
+/* Título */
+.hero h1{
+  margin-bottom: 18px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+
+  /* ✅ responsive */
+  font-size: clamp(34px, 4.5vw, 60px);
+  line-height: 1.05;
+}
+
+/* Subtítulo */
+.hero h3{
+  margin-bottom: 26px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+
+  /* ✅ responsive */
+  font-size: clamp(16px, 1.6vw, 20px);
+  max-width: 600px;
+}
+
+/* ✅ Ajuste extra móvil */
+@media (max-width: 600px){
+  .hero .container{
+    margin-left: 16px;
+    margin-right: 16px;
+    max-width: 100%;
+  }
+
+  .hero::before{
+    background: rgba(0,0,0,0.35); /* un pelín más para legibilidad */
+  }
+}
+
+
+/* ==========================================================
+   8) NUEVA ETAPA
+========================================================== */
+
+.nueva-etapa{
+  padding: 100px 0;
+  background: #ffffff;
+}
+
+.nueva-etapa .container{
+  max-width: 900px;
+}
+
+.nueva-etapa h2{
+  font-family: 'Nunito', sans-serif;
+  font-size: clamp(28px, 3vw, 40px);
+  font-weight: 800;
+  margin-bottom: 30px;
+  color: #0ea5a4;
+}
+
+.nueva-etapa p{
+  font-size: 18px;
+  line-height: 1.8;
+  color: #374151;
+  margin-bottom: 22px;
+}
+
+.nueva-etapa strong{
+  color: #111827;
+}
+
+.nueva-etapa blockquote{
+  margin: 40px 0;
+  padding-left: 24px;
+  border-left: 4px solid #0ea5a4;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.6;
+  color: #111827;
+}
+
+.mensaje-final{
+  margin-top: 60px;
+  padding-top: 40px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.mensaje-final p{
+  font-size: 18px;
+}
+
+.mensaje-final .firma{
+  margin-top: 20px;
+  font-weight: 600;
+  color: #0ea5a4;
 }

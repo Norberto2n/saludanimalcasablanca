@@ -328,3 +328,250 @@
     }
 }
 
+/* =========================
+   SECCIÓN INFO + HORARIO
+========================= */
+.info-horario{
+  padding: 150px 0px 150px 0px;
+  background: #ffffff;
+}
+
+.info-horario-wrap{
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+/* ===== izquierda ===== */
+.info-left{}
+
+/* fotos arriba */
+.info-photos{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+  margin-bottom: 26px;
+}
+
+.photo-card{
+  border-radius: 14px;
+  overflow: hidden;
+  background: #f3f4f6;
+  box-shadow: 0 18px 35px rgba(0,0,0,0.12);
+  position: relative;
+  aspect-ratio: 16 / 9;
+}
+
+.photo-card img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* “polaroid” decorativo en la primera imagen */
+.photo-1 .polaroid{
+  position: absolute;
+  left: 16px;
+  top: 14px;
+  width: 120px;
+  height: 140px;
+  border: 6px solid #fff;
+  border-bottom-width: 22px;
+  border-radius: 6px;
+  transform: rotate(-12deg);
+  box-shadow: 0 18px 35px rgba(0,0,0,0.18);
+  pointer-events: none;
+  opacity: .95;
+}
+
+/* contenido + checks */
+.info-content{
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 30px;
+  align-items: start;
+}
+
+.info-text h2{
+  margin: 0 0 14px;
+  font-size: clamp(22px, 2.4vw, 34px);
+  line-height: 1.15;
+  color: #111827;
+  font-weight: 800;
+}
+
+.info-text p{
+  margin: 0 0 18px;
+  color: #6b7280;
+  line-height: 1.7;
+  font-size: 16px;
+}
+
+.info-link{
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+  color: #0ea5b7;
+  text-decoration: none;
+}
+
+.info-link:hover{
+  text-decoration: underline;
+}
+
+/* lista checks */
+.info-checks{
+  list-style: none;
+  margin: 6px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+  color: #374151;
+  font-weight: 600;
+}
+
+.info-checks li{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 16px;
+}
+
+.info-checks .check{
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  display: grid;
+  place-items: center;
+  background: rgba(14,165,183,.14);
+  color: #0ea5b7;
+  font-weight: 900;
+  flex: 0 0 22px;
+}
+
+/* ===== derecha: tarjeta horario ===== */
+.hours-card{
+  border-radius: 16px;
+  background: #f6f2ea; /* textura tipo papel */
+  box-shadow: 0 18px 40px rgba(0,0,0,0.10);
+  padding: 34px 30px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* textura suave (opcional, queda pro) */
+.hours-card::before{
+  content:"";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 10%, rgba(0,0,0,0.05), transparent 55%),
+    radial-gradient(circle at 80% 30%, rgba(0,0,0,0.04), transparent 55%),
+    radial-gradient(circle at 30% 85%, rgba(0,0,0,0.03), transparent 60%);
+  opacity: .55;
+  pointer-events: none;
+}
+
+.hours-card > *{ position: relative; }
+
+.hours-card h3{
+  margin: 0 0 12px;
+  font-size: 34px;
+  line-height: 1.05;
+  font-weight: 900;
+  color: #111827;
+}
+
+.hours-note{
+  margin: 0 0 22px;
+  color: #6b7280;
+  line-height: 1.7;
+  font-size: 15px;
+}
+
+/* filas horario */
+.hours-list{
+  display: grid;
+  gap: 14px;
+  margin-bottom: 26px;
+}
+
+.hours-row{
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: baseline;
+  gap: 18px;
+  padding-bottom: 10px;
+  border-bottom: 1px dashed rgba(17,24,39,0.18);
+}
+
+.hours-left strong{
+  display: block;
+  font-weight: 800;
+  color: #374151;
+}
+
+.hours-left span{
+  display: block;
+  color: #6b7280;
+  margin-top: 2px;
+  font-size: 14px;
+}
+
+.hours-right{
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  color: #ef4444;
+  font-weight: 900;
+  letter-spacing: .5px;
+  white-space: nowrap;
+}
+
+.hours-right.is-closed{
+  color: #ef4444;
+}
+
+/* botón */
+.hours-btn{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 220px;
+  height: 56px;
+  border-radius: 10px;
+  background: #0f7b86;
+  color: #fff;
+  font-weight: 900;
+  text-decoration: none;
+  box-shadow: 0 16px 30px rgba(15,123,134,0.28);
+}
+
+.hours-btn:hover{
+  filter: brightness(1.05);
+}
+
+/* ===== responsive ===== */
+@media (max-width: 980px){
+  .info-horario-wrap{
+    grid-template-columns: 1fr;
+  }
+  .hours-card{
+    max-width: 520px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 700px){
+  .info-content{
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .photo-1 .polaroid{
+    width: 92px;
+    height: 110px;
+    border-width: 5px;
+    border-bottom-width: 18px;
+  }
+}
