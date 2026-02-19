@@ -127,7 +127,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Init
-  buildDots();
+ 
   render();
   startAuto();
 });

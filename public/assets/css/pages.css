@@ -1,48 +1,281 @@
-/* Hero interior */
-.page-hero {
-    background: linear-gradient(to right, #0ea5a4, #14b8a6);
-    color: white;
-    padding: 90px 0;
+/* ==========================================================
+   PAGES.CSS – ORDENADO (SALUDANIMAL CASABLANCA)
+   ----------------------------------------------------------
+   1) HEROES (Instalaciones / Quiénes somos)
+   2) INSTALACIONES (grid + cards + lightbox)
+   3) SOBRE NOSOTROS (grid + imagen)
+   4) VALORES (cards)
+   5) EQUIPO (grid básico)
+   6) SERVICIOS (cards premium)
+   7) ANIMACIONES (fade-in)
+   8) CONTACTO (grid + formulario)
+   9) INFO + HORARIO (sección completa)
+   10) COMUNIDAD (texto + imagen)
+   ========================================================== */
+
+
+/* ==========================================================
+   1) HEROES
+========================================================== */
+
+/* ==========================================================
+   HEROES (variantes de imagen)
+   - Se usan con: <section class="hero hero-xxxx">
+   - La clase .hero (estructura/overlay/tipografía) ya está definida
+     en tu CSS base (style.css / components.css)
+========================================================== */
+
+/* ---------- HERO QUIÉNES SOMOS (imagen diferente) ---------- */
+.hero-quienes{
+  background-image: url("../img/hero/quienes-somos.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
-/* Grid instalaciones */
-.instalaciones-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 28px;
+/* ---------- HERO INSTALACIONES (imagen diferente) ---------- */
+.hero-instalaciones{
+  background-image: url("../img/hero/instalaciones-hero.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
-.instalacion-card {
-    background: white;
-    border-radius: 18px;
-    overflow: hidden;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.08);
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
+/* ==========================================================
+   (OPCIONAL) Si NO usas page-hero en ninguna página,
+   puedes borrar estos estilos antiguos para evitar conflictos:
+
+   .page-hero { ... }
+   .page-hero-instalaciones { ... }
+
+   Si prefieres no borrarlos todavía, déjalos comentados.
+========================================================== */
+
+/* ==========================================================
+   INTRO INSTALACIONES (estilo hero)
+========================================================== */
+
+.instalaciones-intro{
+  padding: 120px 0 80px;
+  text-align: center;
 }
 
-.instalacion-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 20px 45px rgba(0,0,0,0.12);
+.instalaciones-intro .container{
+  max-width: 900px;
+  margin: 0 auto;
 }
 
-.instalacion-card img {
-    width: 100%;
-    height: 220px;
-    object-fit: cover;
+.instalaciones-intro h2{
+  margin-bottom: 22px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+
+  font-size: clamp(28px, 3.2vw, 46px);
+  line-height: 1.1;
 }
 
-.instalacion-content {
-    padding: 22px;
+.instalaciones-intro p{
+  font-family: 'Nunito', sans-serif;
+  font-weight: 400;
+
+  font-size: clamp(16px, 1.2vw, 20px);
+  line-height: 1.6;
+
+  color: rgba(17,24,39,0.75);
 }
 
-.instalacion-content h3 {
-    margin-bottom: 10px;
+/* =========================
+   SEPARADOR INSTALACIONES (con personalidad)
+========================= */
+
+.instalaciones-separador{
+  grid-column: 1 / -1;        /* ocupa todo el ancho del grid */
+  text-align: center;
+  padding: 90px 0 70px;
+  position: relative;
 }
-/* Lightbox */
-.lightbox {
+
+/* línea superior y inferior sutil */
+.instalaciones-separador::before,
+.instalaciones-separador::after{
+  content:"";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(720px, 88%);
+  height: 1px;
+  background: rgba(17,24,39,0.10);
+}
+
+.instalaciones-separador::before{ top: 60px; }
+.instalaciones-separador::after{ bottom: 60px; }
+
+/* badge tipo “píldora” */
+.instalaciones-separador .sep-badge{
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 10px 16px;
+  border-radius: 9px;
+
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  letter-spacing: 0.3px;
+
+  font-size: clamp(13px, 1vw, 15px);
+
+  background: rgba(141,217,233,0.22); /* tu azulito suave */
+  border: 1px solid rgba(141,217,233,0.55);
+  color: rgba(17,24,39,0.85);
+}
+
+/* icono sencillo (huella) sin imágenes */
+.instalaciones-separador .sep-badge::before{
+  content: "🐾";
+  font-size: 16px;
+  line-height: 1;
+}
+
+/* texto principal */
+.instalaciones-separador p{
+  margin: 16px auto 0;
+  max-width: 820px;
+
+  font-family: 'Nunito', sans-serif;
+  font-weight: 400;
+
+  font-size: clamp(16px, 1.25vw, 20px);
+  line-height: 1.6;
+
+  color: rgba(17,24,39,0.72);
+}
+
+
+/* =========================
+   INSTALACIONES – CONTEXTO VISUAL
+========================= */
+
+.instalacion-tag{
+  display: inline-block;
+  margin-bottom: 18px;
+  padding: 6px 18px;
+
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.4px;
+
+  border-radius: 9px;
+  background: rgba(141,217,233,0.20);
+  color: rgba(17,24,39,0.85);
+  border: 1px solid rgba(141,217,233,0.50);
+}
+
+.instalacion-content h3{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+
+
+
+/* ==========================================================
+   2) INSTALACIONES (ESTILO HERO + MÁS ANCHO)
+========================================================== */
+
+.instalaciones-section{
+  padding: 100px 0;
+}
+
+/* Grid más ancho, similar sensación al hero */
+.instalaciones-grid{
+  display: grid;
+   grid-template-columns: repeat(3, 2fr); /* 3 columnas exactas */
+  gap: 60px;
+    width: 90%;
+  max-width: 1700px;
+  margin: 0 auto;
+  padding: 0 30px; /* mismo aire lateral que el hero */
+}
+
+/* Card contenedor sin fondo */
+.instalacion-card{
+  background: transparent;
+  box-shadow: none;
+  border-radius: 0;
+  overflow: visible;
+  transition: transform 0.3s ease;
+}
+
+.instalacion-card:hover{
+  transform: translateY(-8px);
+}
+
+/* Cápsula SOLO imagen */
+.instalacion-card .lightbox-link{
+  display: block;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.10);
+  transition: box-shadow 0.3s ease;
+}
+
+.instalacion-card:hover .lightbox-link{
+  box-shadow: 0 28px 65px rgba(0,0,0,0.14);
+}
+
+.instalacion-card img{
+  width: 100%;
+  height: 310px;   /* más grandes */
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.instalacion-card:hover img{
+  transform: scale(1.04);
+}
+
+/* =========================
+   INSTALACIONES – TIPOGRAFÍA HERO (más sutil)
+========================= */
+
+.instalacion-content{
+  margin-top: 18px;
+}
+
+/* Título */
+.instalacion-content h3{
+  margin: 0 0 10px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+
+  font-size: clamp(20px, 1.8vw, 26px);
+  line-height: 1.15;
+}
+
+/* Descripción */
+.instalacion-content p{
+  margin: 0;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 400;
+
+  font-size: clamp(15px, 1.05vw, 17px);
+  line-height: 1.6;
+  max-width: 580px;
+
+  color: rgba(17,24,39,0.72);
+}
+
+
+/* ================= LIGHTBOX (sin cambios estructurales) ================= */
+
+.lightbox{
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.82);
+  background: rgba(0,0,0,0.85);
   display: none;
   align-items: center;
   justify-content: center;
@@ -50,287 +283,540 @@
   z-index: 9999;
 }
 
-.lightbox.open { display: flex; }
+.lightbox.open{ display: flex; }
 
-.lightbox-figure {
-  max-width: min(1100px, 94vw);
-  max-height: 84vh;
+.lightbox-figure{
+  max-width: min(1200px, 94vw);
+  max-height: 85vh;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 14px;
   align-items: center;
 }
 
-.lightbox img {
+.lightbox img{
   max-width: 100%;
-  max-height: 76vh;
-  border-radius: 16px;
-  box-shadow: 0 18px 60px rgba(0,0,0,0.35);
+  max-height: 78vh;
+  border-radius: 10px;
+  box-shadow: 0 25px 70px rgba(0,0,0,0.45);
 }
 
-.lightbox figcaption {
-  color: #e5e7eb;
+.lightbox figcaption{
+  color: #f3f4f6;
   font-weight: 700;
   text-align: center;
 }
 
-.lightbox-close {
+.lightbox-close{
   position: absolute;
-  top: 18px;
-  right: 18px;
-  width: 44px;
-  height: 44px;
+  top: 20px;
+  right: 20px;
+  width: 46px;
+  height: 46px;
   border-radius: 999px;
   border: 1px solid rgba(255,255,255,0.25);
-  background: rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.12);
   color: #fff;
   cursor: pointer;
   font-size: 18px;
   font-weight: 900;
 }
 
-.lightbox-nav {
+.lightbox-nav{
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 48px;
-  height: 48px;
+  width: 52px;
+  height: 52px;
   border-radius: 999px;
   border: 1px solid rgba(255,255,255,0.25);
-  background: rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.12);
   color: #fff;
   cursor: pointer;
-  font-size: 26px;
+  font-size: 28px;
   font-weight: 900;
 }
 
-.lightbox-nav.prev { left: 18px; }
-.lightbox-nav.next { right: 18px; }
+.lightbox-nav.prev{ left: 20px; }
+.lightbox-nav.next{ right: 20px; }
 
-@media (max-width: 700px) {
-  .lightbox-nav { display: none; } /* en móvil se puede usar swipe más adelante */
+@media (max-width: 900px){
+  .instalaciones-grid{
+    padding: 0 30px;
+    gap: 40px;
+  }
+
+  .instalacion-card img{
+    height: 320px;
+  }
 }
 
-/* SOBRE NOSOTROS */
+@media (max-width: 600px){
+  .instalaciones-grid{
+    padding: 0 20px;
+  }
 
-.sobre-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+  .instalacion-card img{
+    height: 280px;
+  }
+
+  .lightbox-nav{ display: none; }
+}
+
+
+
+/* ==========================================================
+   3) SOBRE NOSOTROS
+========================================================== */
+
+.sobre-grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  align-items: center;
+}
+
+.sobre-imagen img{
+  width: 100%;
+  border-radius: 18px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+}
+
+@media (max-width: 900px){
+  .sobre-grid{
+    grid-template-columns: 1fr;
+  }
+}
+
+
+
+/* ==========================================================
+   4) VALORES
+========================================================== */
+
+.valores-section{
+  padding: 100px 20px;
+  background: #f8fafc;
+}
+
+.valores-section h2{
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: clamp(32px, 4vw, 48px);
+  margin-bottom: 10px;
+  color: #1f2937;
+}
+
+.valores-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 35px;
+  margin-top: 50px;
+}
+
+.valor-card{
+  background: #ffffff;
+  padding: 35px 28px;
+  border-radius: 20px;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.06);
+  transition: transform .35s ease, box-shadow .35s ease;
+  text-align: center;
+  position: relative;
+}
+
+.valor-card:hover{
+  transform: translateY(-6px);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.10);
+}
+
+.valor-card h3{
+  margin: 10px 0;
+  font-weight: 800;
+  font-size: 20px;
+  color: #138a98;
+}
+
+.valor-card p{
+  margin: 0;
+  color: #6b7280;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.valor-card::after{
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 4px;
+  border-radius: 999px;
+  background: rgba(13,110,253,0.2);
+}
+
+.valor-icon{
+  font-size: 34px;
+  width: 64px;
+  height: 64px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  background: #f1f5f9;
+  border-radius: 50%;
+}
+
+
+/* ==========================================================
+   SECCIÓN EQUIPO – Estilo elegante informal (con label + name)
+   (ESTE es el diseño bueno. No lo mezcles con un "equipo-grid básico")
+========================================================== */
+
+.equipo{
+  padding: 110px 20px;
+  background: #f4f6f8;
+  font-family: 'Nunito', sans-serif;
+}
+
+/* Intro */
+.equipo-intro{
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 70px auto;
+}
+
+.equipo-intro h2{
+  font-size: clamp(38px, 4.8vw, 56px);
+  margin-bottom: 18px;
+  color: #3b3b3b;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.equipo-intro p{
+  font-size: 20px;
+  line-height: 1.6;
+  color: #8a8a8a;
+}
+
+/* GRID (2 columnas en desktop) */
+.equipo-grid{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 60px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* CARD (contenedor, NO tarjeta blanca con padding) */
+.equipo-card{
+  display: flex;
+  flex-direction: column;
+}
+
+/* Imagen */
+.equipo-img{
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #e9eef3;
+}
+
+.equipo-img img{
+  width: 100%;
+  height: 520px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.45s ease;
+}
+
+/* Hover suave */
+.equipo-card:hover .equipo-img img{
+  transform: scale(1.03);
+}
+
+/* Especialización (pastilla blanca) */
+.equipo-label{
+  position: absolute;
+  bottom: 85px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  background: #ffffff;
+  padding: 7px 15px;
+  border-radius: 4px;
+
+  font-weight: 800;
+  font-size: 16px;
+  line-height: 1;
+
+  color: #138a98;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.10);
+  white-space: nowrap;
+}
+
+/* Nombre (bloque azul) */
+.equipo-name{
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  background: #138a98;
+  color: #ffffff;
+
+  padding: 10px 20px;
+  border-radius: 4px;
+
+  font-weight: 800;
+  font-size: 28px;
+  line-height: 1;
+
+  box-shadow: 0 10px 24px rgba(0,0,0,0.16);
+  white-space: nowrap;
+}
+
+/* Info */
+.equipo-info{
+  margin-top: 22px;
+  padding: 0 4px;
+}
+
+/* Lista por apartados */
+.equipo-lista{
+  list-style: none;
+  margin: 0;
+  padding: 18px 18px;
+
+  background: rgba(255,255,255,0.85);
+  border-radius: 14px;
+
+  box-shadow: 0 10px 24px rgba(0,0,0,0.06);
+  border: 1px solid rgba(13,110,253,0.10);
+}
+
+.equipo-lista li{
+  position: relative;
+  padding: 12px 12px 12px 34px;
+
+  font-size: 16px;
+  line-height: 1.65;
+  color: #4b5563;
+}
+
+.equipo-lista li + li{
+  border-top: 1px solid rgba(17,24,39,0.08);
+}
+
+.equipo-lista li::before{
+  content: "";
+  position: absolute;
+  left: 12px;
+  top: 18px;
+
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+
+  background: #138a98;
+  box-shadow: 0 0 0 4px rgba(13,110,253,0.15);
+}
+
+/* Punto final destacado */
+.equipo-lista .equipo-areas{
+  background: rgba(13,110,253,0.06);
+  border-radius: 12px;
+  margin-top: 12px;
+  border-top: none;
+}
+
+.equipo-lista .equipo-areas::before{
+  top: 18px;
+  box-shadow: 0 0 0 4px rgba(13,110,253,0.20);
+}
+
+.equipo-lista strong{
+  color: #1f2937;
+  font-weight: 800;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px){
+  .equipo-grid{
+    grid-template-columns: 1fr;
     gap: 50px;
-    align-items: center;
+  }
+
+  .equipo-img img{
+    height: 420px;
+  }
+
+  .equipo-name{
+    font-size: 24px;
+    padding: 12px 24px;
+  }
+
+  .equipo-label{
+    bottom: 86px;
+    font-size: 15px;
+    padding: 8px 18px;
+  }
 }
 
-.sobre-imagen img {
-    width: 100%;
-    border-radius: 18px;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+@media (max-width: 520px){
+  .equipo-label,
+  .equipo-name{
+    white-space: normal;
+    text-align: center;
+    width: calc(100% - 40px);
+  }
+
+  .equipo-label{
+    bottom: 92px;
+  }
 }
 
-/* Valores */
 
-.valores-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 30px;
-    margin-top: 40px;
+/* ==========================================================
+   6) SERVICIOS (CARDS PREMIUM)
+========================================================== */
+
+.servicios-section{
+  background: linear-gradient(to bottom, #f8fafc, #ffffff);
 }
 
-.valor-card {
-    background: white;
-    padding: 30px;
-    border-radius: 16px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+.servicios-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 30px;
 }
 
-/* Equipo */
-
-.equipo-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
-    margin-top: 40px;
+.servicio-card{
+  background: white;
+  padding: 35px 30px;
+  border-radius: 22px;
+  box-shadow: 0 20px 45px rgba(0,0,0,0.08);
+  transition: all 0.35s ease;
+  position: relative;
+  overflow: hidden;
 }
 
-.equipo-card {
-    background: white;
-    padding: 20px;
-    border-radius: 18px;
-    box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+.servicio-card::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(14,165,164,0.08), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
-.equipo-card img {
-    width: 100%;
-    height: 260px;
-    object-fit: cover;
-    border-radius: 14px;
-    margin-bottom: 15px;
+.servicio-card:hover::before{
+  opacity: 1;
 }
 
-/* Responsive */
-
-@media (max-width: 900px) {
-    .sobre-grid {
-        grid-template-columns: 1fr;
-    }
+.servicio-card:hover{
+  transform: translateY(-8px);
+  box-shadow: 0 25px 60px rgba(14,165,164,0.25);
 }
 
-/* SERVICIOS */
-
-.servicios-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 30px;
-}
-
-.servicio-card {
-    background: white;
-    padding: 30px;
-    border-radius: 18px;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.08);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.servicio-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 20px 45px rgba(0,0,0,0.12);
-}
-
-/* Fondo sección */
-.servicios-section {
-    background: linear-gradient(to bottom, #f8fafc, #ffffff);
-}
-
-/* Tarjetas premium */
-.servicio-card {
-    background: white;
-    padding: 35px 30px;
-    border-radius: 22px;
-    box-shadow: 0 20px 45px rgba(0,0,0,0.08);
-    transition: all 0.35s ease;
-    position: relative;
-    overflow: hidden;
-}
-
-.servicio-card::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, rgba(14,165,164,0.08), transparent);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.servicio-card:hover::before {
-    opacity: 1;
-}
-
-.servicio-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 25px 60px rgba(14,165,164,0.25);
-}
-
-/* Icono */
-.servicio-icon {
-    font-size: 36px;
-    margin-bottom: 18px;
-    background: rgba(14,165,164,0.1);
-    width: 70px;
-    height: 70px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 18px;
-}
-
-/* Animación mejorada */
-.fade-in {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: all 0.8s ease;
-    transition-delay: var(--delay);
-}
-
-.fade-in.visible {
-    opacity: 1;
-    transform: translateY(0);
+.servicio-icon{
+  font-size: 36px;
+  margin-bottom: 18px;
+  background: rgba(14,165,164,0.1);
+  width: 70px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 18px;
 }
 
 
 
-/* Animación base */
-.fade-in {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: all 0.8s ease;
+/* ==========================================================
+   7) ANIMACIONES (FADE-IN)
+========================================================== */
+
+.fade-in{
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s ease;
+  transition-delay: var(--delay);
 }
 
-.fade-in.visible {
-    opacity: 1;
-    transform: translateY(0);
+.fade-in.visible{
+  opacity: 1;
+  transform: translateY(0);
 }
-/* CONTACTO */
 
-.contacto-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-    align-items: start;
+
+
+/* ==========================================================
+   8) CONTACTO (GRID + FORM)
+========================================================== */
+
+.contacto-grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: start;
 }
 
 .contacto-info h2,
-.contacto-form h2 {
-    margin-bottom: 25px;
+.contacto-form h2{
+  margin-bottom: 25px;
 }
 
-.contacto-item {
-    margin-bottom: 25px;
+.contacto-item{
+  margin-bottom: 25px;
 }
 
-.contacto-item h3 {
-    font-size: 16px;
-    margin-bottom: 6px;
+.contacto-item h3{
+  font-size: 16px;
+  margin-bottom: 6px;
 }
 
-/* FORMULARIO */
-
-.form-group {
-    margin-bottom: 20px;
+/* Formulario */
+.form-group{
+  margin-bottom: 20px;
 }
 
-.form-group label {
-    display: block;
-    margin-bottom: 6px;
-    font-weight: 600;
+.form-group label{
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
 }
 
 .form-group input,
-.form-group textarea {
-    width: 100%;
-    padding: 12px;
-    border-radius: 12px;
-    border: 1px solid #e5e7eb;
-    font-size: 14px;
-    transition: border 0.2s ease, box-shadow 0.2s ease;
+.form-group textarea{
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  font-size: 14px;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
 }
 
 .form-group input:focus,
-.form-group textarea:focus {
-    outline: none;
-    border-color: #0ea5a4;
-    box-shadow: 0 0 0 3px rgba(14,165,164,0.15);
+.form-group textarea:focus{
+  outline: none;
+  border-color: #0ea5a4;
+  box-shadow: 0 0 0 3px rgba(14,165,164,0.15);
 }
 
-/* Responsive */
-
-@media (max-width: 900px) {
-    .contacto-grid {
-        grid-template-columns: 1fr;
-    }
+@media (max-width: 900px){
+  .contacto-grid{
+    grid-template-columns: 1fr;
+  }
 }
 
-/* =========================
-   SECCIÓN INFO + HORARIO
-========================= */
+
+
+/* ==========================================================
+   9) INFO + HORARIO (SECCIÓN COMPLETA)
+========================================================== */
+
 .info-horario{
   padding: 150px 0px 150px 0px;
   background: #ffffff;
@@ -343,10 +829,7 @@
   align-items: start;
 }
 
-/* ===== izquierda ===== */
-.info-left{}
-
-/* fotos arriba */
+/* Fotos arriba */
 .info-photos{
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -370,7 +853,7 @@
   display: block;
 }
 
-/* “polaroid” decorativo en la primera imagen */
+/* Polaroid decorativo */
 .photo-1 .polaroid{
   position: absolute;
   left: 16px;
@@ -386,7 +869,7 @@
   opacity: .95;
 }
 
-/* contenido + checks */
+/* Contenido + checks */
 .info-content{
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
@@ -422,7 +905,7 @@
   text-decoration: underline;
 }
 
-/* lista checks */
+/* Checks */
 .info-checks{
   list-style: none;
   margin: 6px 0 0;
@@ -452,17 +935,16 @@
   flex: 0 0 22px;
 }
 
-/* ===== derecha: tarjeta horario ===== */
+/* Tarjeta horario */
 .hours-card{
   border-radius: 16px;
-  background: #f6f2ea; /* textura tipo papel */
+  background: #f6f2ea;
   box-shadow: 0 18px 40px rgba(0,0,0,0.10);
   padding: 34px 30px;
   position: relative;
   overflow: hidden;
 }
 
-/* textura suave (opcional, queda pro) */
 .hours-card::before{
   content:"";
   position: absolute;
@@ -492,7 +974,6 @@
   font-size: 15px;
 }
 
-/* filas horario */
 .hours-list{
   display: grid;
   gap: 14px;
@@ -533,7 +1014,6 @@
   color: #ef4444;
 }
 
-/* botón */
 .hours-btn{
   display: inline-flex;
   align-items: center;
@@ -552,7 +1032,7 @@
   filter: brightness(1.05);
 }
 
-/* ===== responsive ===== */
+/* Responsive info/horario */
 @media (max-width: 980px){
   .info-horario-wrap{
     grid-template-columns: 1fr;
@@ -575,3 +1055,55 @@
     border-bottom-width: 18px;
   }
 }
+
+
+
+/* ==========================================================
+   10) COMUNIDAD
+========================================================== */
+
+.comunidad-section{
+  padding: 110px 20px;
+  background: #ffffff;
+}
+
+.comunidad-section h2{
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: clamp(32px, 4vw, 48px);
+  margin-bottom: 20px;
+  color: #1f2937;
+}
+
+.comunidad-texto{
+  max-width: 750px;
+  margin: 0 auto 50px auto;
+  font-size: 18px;
+  line-height: 1.7;
+  color: #6b7280;
+}
+
+.comunidad-imagen{
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.comunidad-imagen img{
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
+  box-shadow: 0 20px 45px rgba(0,0,0,0.12);
+  transition: transform 0.4s ease;
+}
+
+.comunidad-imagen img:hover{
+  transform: scale(1.02);
+}
+
+@media (max-width: 768px){
+  .comunidad-texto{
+    font-size: 16px;
+  }
+}
+
+
