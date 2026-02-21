@@ -62,3 +62,4 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.key === "ArrowLeft") prev();
   });
 });
+
