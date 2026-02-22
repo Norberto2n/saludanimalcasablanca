@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contacto | SaludAnimal Casablanca</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contacto | SaludAnimal Casablanca</title>
 
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/components.css">
-    <link rel="stylesheet" href="assets/css/pages.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/pages.css">
 </head>
 
 <body>
@@ -16,100 +16,91 @@
 
 <main>
 
-    <!-- HERO -->
-    <section class="page-hero">
-        <div class="container text-center">
-            <h1>Contacto</h1>
-            <p>Estamos aquí para ayudarte. Ponte en contacto con nosotros.</p>
+  <!-- HERO CONTACTO (MISMA ESTRUCTURA QUE EL RESTO) -->
+  <section class="hero hero-contacto">
+    <div class="container">
+      <h1>Contacto</h1>
+      <p>Estamos aquí para ayudarte. Ponte en contacto con nosotros.</p>
+    </div>
+  </section>
+
+  <!-- BLOQUE CONTACTO -->
+  <section class="contacto-section">
+    <div class="container contacto-grid">
+
+      <!-- DATOS -->
+      <div class="contacto-info fade-in">
+        <h2>Información de contacto</h2>
+
+        <div class="contacto-item">
+          <h3>Dirección</h3>
+          <p>Calle Ejemplo 123<br>28000 Madrid</p>
         </div>
-    </section>
 
-
-    <!-- BLOQUE CONTACTO -->
-    <section class="contacto-section">
-        <div class="container contacto-grid">
-
-            <!-- DATOS -->
-            <div class="contacto-info fade-in">
-
-                <h2>Información de contacto</h2>
-
-                <div class="contacto-item">
-                    <h3>Dirección</h3>
-                    <p>Calle Ejemplo 123<br>28000 Madrid</p>
-                </div>
-
-                <div class="contacto-item">
-                    <h3>Teléfono</h3>
-                    <p><a href="tel:+34900000000">+34 900 000 000</a></p>
-                </div>
-
-                <div class="contacto-item">
-                    <h3>Email</h3>
-                    <p><a href="mailto:info@saludanimalcasablanca.com">info@saludanimalcasablanca.com</a></p>
-                </div>
-
-                <div class="contacto-item">
-                    <h3>Horario</h3>
-                    <p>Lunes a Viernes: 10:00–14:00 | 17:00–20:00<br>
-                       Sábados: 10:00–13:00</p>
-                </div>
-
-            </div>
-
-
-            <!-- FORMULARIO -->
-            <div class="contacto-form fade-in">
-
-                <h2>Envíanos un mensaje</h2>
-
-                <form action="api/send.php" method="POST" id="contactForm">
-
-                    <div class="form-group">
-                        <label for="nombre">Nombre</label>
-                        <input type="text" id="nombre" name="nombre" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="email">Correo electrónico</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="telefono">Teléfono</label>
-                        <input type="text" id="telefono" name="telefono">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="mensaje">Mensaje</label>
-                        <textarea id="mensaje" name="mensaje" rows="5" required></textarea>
-                    </div>
-
-                    <button type="submit" class="btn-primary">
-                        Enviar mensaje
-                    </button>
-
-                </form>
-
-            </div>
-
+        <div class="contacto-item">
+          <h3>Teléfono</h3>
+          <p><a href="tel:+34900000000">+34 900 000 000</a></p>
         </div>
-    </section>
 
-
-    <!-- MAPA -->
-    <section class="mapa-section">
-        <div class="container">
-            <iframe 
-                src="https://www.google.com/maps?q=Madrid&output=embed"
-                width="100%" 
-                height="400" 
-                style="border:0; border-radius:18px;" 
-                allowfullscreen="" 
-                loading="lazy">
-            </iframe>
+        <div class="contacto-item">
+          <h3>Email</h3>
+          <p><a href="mailto:info@saludanimalcasablanca.com">info@saludanimalcasablanca.com</a></p>
         </div>
-    </section>
+
+        <div class="contacto-item">
+          <h3>Horario</h3>
+          <p>Lunes a Viernes: 10:00–14:00 | 17:00–20:00<br>
+            Sábados: 10:00–13:00</p>
+        </div>
+      </div>
+
+      <!-- FORMULARIO -->
+      <div class="contacto-form fade-in">
+        <h2>Envíanos un mensaje</h2>
+
+        <form action="api/send.php" method="POST" id="contactForm">
+
+          <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" name="nombre" required>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Correo electrónico</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+
+          <div class="form-group">
+            <label for="telefono">Teléfono</label>
+            <input type="text" id="telefono" name="telefono">
+          </div>
+
+          <div class="form-group">
+            <label for="mensaje">Mensaje</label>
+            <textarea id="mensaje" name="mensaje" rows="5" required></textarea>
+          </div>
+
+          <button type="submit" class="btn-primary">Enviar mensaje</button>
+
+        </form>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- MAPA -->
+  <section class="mapa-section">
+    <div class="container">
+      <iframe
+        src="https://www.google.com/maps?q=Madrid&output=embed"
+        width="100%"
+        height="400"
+        style="border:0; border-radius:18px;"
+        allowfullscreen=""
+        loading="lazy">
+      </iframe>
+    </div>
+  </section>
 
 </main>
 
