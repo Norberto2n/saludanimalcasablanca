@@ -1887,6 +1887,155 @@
   background-repeat: no-repeat;
 }
 
+
+
+/* ==========================================================
+   GALERÍA – REDES SOCIALES (versión refinada y estilizada)
+   ========================================================== */
+
+.redes-sociales{
+  padding: 80px 0;
+  text-align: center;
+}
+
+.redes-title{
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.redes-text{
+  max-width: 720px;
+  margin: 0 auto 40px;
+  line-height: 1.6;
+  opacity: .85;
+}
+
+/* Links */
+.redes-links{
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* ==========================================================
+   BOTÓN BASE – Más estrecho y alargado
+   ========================================================== */
+
+.red-btn{
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 5px 26px;              /* más fino vertical, más largo horizontal */
+  border-radius: 15px;            /* forma píldora elegante */
+  text-decoration: none;
+
+  background: #fff;
+  border: 1px solid rgba(0,0,0,.08);
+  box-shadow: 0 8px 18px rgba(0,0,0,.06);
+
+  font-weight: 600;
+  font-size: 1.15rem;
+  line-height: 1;
+
+  transition: all .2s ease;
+}
+
+.red-btn:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 14px 26px rgba(0,0,0,.10);
+}
+
+/* Texto */
+.red-btn__text{
+  line-height: 1;
+}
+
+/* ==========================================================
+   ICONO
+   ========================================================== */
+
+.red-btn__icon{
+  width: 32px;
+  height: 32px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+  overflow: hidden;           /* evita desbordes */
+}
+
+.red-btn__icon img{
+  width: 32px;                /* tamaño real visible */
+  height: 32px;
+  object-fit: contain;        /* mantiene proporción */
+  display: block;
+}
+
+/* ==========================================================
+   INSTAGRAM
+   ========================================================== */
+
+.red-btn--ig{
+  color: #C13584;
+}
+
+.red-btn__icon--ig{
+  background: linear-gradient(
+    135deg,
+    #F58529,
+    #DD2A7B,
+    #8134AF,
+    #515BD4
+  );
+}
+
+/* Icono blanco sobre degradado */
+.red-btn__icon--ig img{
+  filter: brightness(0) invert(1);
+}
+
+/* ==========================================================
+   FACEBOOK
+   ========================================================== */
+
+.red-btn--fb{
+  color: #1877F2;
+}
+
+.red-btn__icon--fb{
+  background: #1877F2;
+}
+
+/* Icono blanco sobre azul */
+.red-btn__icon--fb img{
+  filter: brightness(0) invert(1);
+}
+
+/* ==========================================================
+   RESPONSIVE
+   ========================================================== */
+
+@media (max-width: 520px){
+  .red-btn{
+    padding: 9px 20px;
+    font-size: .9rem;
+  }
+
+  .red-btn__icon{
+    width: 30px;
+    height: 30px;
+  }
+
+  .red-btn__icon img{
+    width: 16px;
+    height: 16px;
+  }
+}
+
 /* ==========================================================
    GALERÍA – MASONRY REAL (ajustada)
    ========================================================== */
@@ -1977,16 +2126,27 @@
 }
 
 /* =========================
-   LIGHTBOX / SLIDER
+   LIGHTBOX / SLIDER (AUTO-SIZE + CONTROLES FUERA)
+   - Imagen a tamaño real hasta el máximo del viewport
+   - Flechas fijas izq/der
+   - Contador fijo arriba izq (fuera de la imagen)
    ========================= */
+
 .lb{
   position: fixed;
   inset: 0;
   display: none;
   z-index: 9999;
+
+  /* centrado del contenido */
+  align-items: center;
+  justify-content: center;
+
+  /* aire en bordes para que no toque el viewport */
+  padding: 24px;
 }
 
-.lb.is-open{ display: block; }
+.lb.is-open{ display: flex; }
 
 .lb-backdrop{
   position: absolute;
@@ -1994,99 +2154,157 @@
   background: rgba(0,0,0,.75);
 }
 
+/* Dialog: NO fija tamaños, solo centra */
 .lb-dialog{
   position: relative;
-  width: min(1100px, 92vw);
-  height: min(82vh, 720px);
-  margin: 6vh auto 0;
   display: flex;
   align-items: center;
   justify-content: center;
+
+  /* para que no se “corte” nada por padding del .lb */
+  max-width: 100%;
+  max-height: 100%;
 }
 
+/* Figure */
 .lb-figure{
   margin: 0;
-  width: 100%;
-  height: 100%;
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 10px;
+  max-width: 100%;
 }
 
+/* Imagen: tamaño real, limitada solo por pantalla */
 .lb-img{
-  width: 100%;
-  height: 100%;
+  width: auto;
+  height: auto;
+
+  /* límites reales del viewport (restando el padding y dejando espacio a caption) */
+  max-width: calc(100vw - 48px);
+  max-height: calc(100vh - 140px);
+
   object-fit: contain;
   border-radius: 16px;
   background: rgba(255,255,255,.04);
 }
 
-.lb-caption,
-.lb-counter{
+/* Caption debajo */
+.lb-caption{
   color: #fff;
   text-align: center;
+  max-width: min(900px, calc(100vw - 48px));
 }
 
-.lb-counter{ opacity: .85; font-size: .95rem; }
+/* =========================
+   CONTADOR: fijo arriba izquierda (FUERA de la imagen)
+   ========================= */
+.lb-counter{
+  position: fixed;
+  top: 20px;
+  left: 20px;
 
+  padding: 6px 12px;
+  border-radius: 999px;
+
+  font-size: .95rem;
+  color: #fff;
+  opacity: .9;
+
+  background: rgba(0,0,0,.45);
+  backdrop-filter: blur(6px);
+
+  pointer-events: none;
+  z-index: 10001;
+}
+
+/* =========================
+   CERRAR: fijo arriba derecha
+   ========================= */
 .lb-close{
-  position: absolute;
-  top: -10px;
-  right: -10px;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+
   width: 44px;
   height: 44px;
   border-radius: 999px;
   border: 0;
   cursor: pointer;
+
   font-size: 28px;
   line-height: 1;
-}
 
-.lb-nav{
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 46px;
-  height: 46px;
-  border-radius: 999px;
-  border: 0;
-  cursor: pointer;
-  font-size: 30px;
-  line-height: 1;
-}
+  background: rgba(255,255,255,.12);
+  backdrop-filter: blur(6px);
+  color: #fff;
 
-.lb-prev{ left: -12px; }
-.lb-next{ right: -12px; }
-
-@media (max-width: 520px){
-  .lb-prev{ left: 6px; }
-  .lb-next{ right: 6px; }
-  .lb-close{ right: 6px; top: 6px; }
+  z-index: 10001;
 }
 
 /* =========================
-   CONTADOR EN ESQUINA
+   FLECHAS: fijas en los lados (FUERA de la imagen)
    ========================= */
+.lb-nav{
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
 
-.lb-dialog{
-  position: relative; /* importante */
-}
+  width: 54px;
+  height: 54px;
+  border-radius: 999px;
+  border: 0;
+  cursor: pointer;
 
-.lb-counter{
-  position: absolute;
-  top: 18px;
-  left: 20px;
-  background: rgba(0,0,0,0.6);
+  font-size: 30px;
+  line-height: 1;
+
+  background: rgba(255,255,255,.12);
   backdrop-filter: blur(6px);
   color: #fff;
-  padding: 6px 14px;
-  border-radius: 999px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  letter-spacing: .5px;
-  z-index: 5;
+
+  transition: background .2s ease;
+  z-index: 10001;
 }
 
+.lb-nav:hover{
+  background: rgba(255,255,255,.25);
+}
+
+.lb-prev{ left: 20px; }
+.lb-next{ right: 20px; }
+
+/* Mobile */
+@media (max-width: 520px){
+  .lb{ padding: 14px; }
+
+  .lb-img{
+    max-width: calc(100vw - 28px);
+    max-height: calc(100vh - 160px);
+    border-radius: 14px;
+  }
+
+  .lb-nav{
+    width: 44px;
+    height: 44px;
+    font-size: 24px;
+  }
+
+  .lb-prev{ left: 10px; }
+  .lb-next{ right: 10px; }
+
+  .lb-counter{
+    top: 12px;
+    left: 12px;
+    font-size: .9rem;
+  }
+
+  .lb-close{
+    top: 12px;
+    right: 12px;
+  }
+}
 
 
 /* ---------- HERO CONTACTO (imagen diferente) ---------- */

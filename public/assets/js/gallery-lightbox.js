@@ -16,10 +16,10 @@
 
   function collectGallery(name) {
     items = qsa('a[data-gallery="' + name + '"]').map(function (a) {
-      var img = a.querySelector('img');
       return {
         src: a.getAttribute('href'),
-        caption: a.getAttribute('data-caption') || (img ? img.getAttribute('alt') : '') || ''
+        // 👇 SOLO usa data-caption (si no existe, queda vacío)
+        caption: a.getAttribute('data-caption') || ''
       };
     });
   }
@@ -33,9 +33,14 @@
     pre.onload = function () { lbImg.src = it.src; };
     pre.src = it.src;
 
-    lbImg.alt = it.caption || 'Imagen de galería';
-    lbCaption.textContent = it.caption || '';
-    lbCounter.textContent = (index + 1) + ' / ' + items.length;
+    // 👇 No usar caption como alt del lightbox
+    lbImg.alt = 'Imagen de galería';
+
+    // 👇 Si no quieres texto, lo dejamos siempre vacío
+    if (lbCaption) lbCaption.textContent = '';
+
+    // contador
+    if (lbCounter) lbCounter.textContent = (index + 1) + ' / ' + items.length;
   }
 
   function openAt(i) {
@@ -67,10 +72,8 @@
 
   // Click para abrir (delegado)
   document.addEventListener('click', function (e) {
-    // Soporte para navegadores sin closest (muy raro hoy, pero por si acaso)
     var target = e.target;
     var a = target.closest ? target.closest('a[data-gallery]') : null;
-
     if (!a) return;
 
     e.preventDefault();
