@@ -230,24 +230,39 @@ function ponerAnioActual() {
 
 
 // ==========================================================
-// BACK TO TOP
+// BACK TO TOP (robusto: funciona aunque el footer se cargue por JS)
 // ==========================================================
 function activarBackToTop() {
   const backToTop = document.getElementById("backToTop");
-  if (!backToTop) return;
+  if (!backToTop) return false;
 
-  // ✅ Evita duplicar listeners
-  if (backToTop.dataset.bound === "1") return;
+  // Evita duplicar listeners
+  if (backToTop.dataset.bound === "1") return true;
   backToTop.dataset.bound = "1";
 
-  window.addEventListener("scroll", () => {
-    if (window.scrollY > 300) backToTop.classList.add("show");
-    else backToTop.classList.remove("show");
-  }, { passive: true });
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (window.scrollY > 300) backToTop.classList.add("show");
+      else backToTop.classList.remove("show");
+    },
+    { passive: true }
+  );
 
   backToTop.addEventListener("click", () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   });
+
+  return true;
 }
 
+// Espera a que exista (por si el footer se inyecta)
+document.addEventListener("DOMContentLoaded", () => {
+  if (activarBackToTop()) return;
 
+  const mo = new MutationObserver(() => {
+    if (activarBackToTop()) mo.disconnect();
+  });
+
+  mo.observe(document.body, { childList: true, subtree: true });
+});

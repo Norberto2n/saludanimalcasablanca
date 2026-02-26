@@ -2314,3 +2314,217 @@
   background-position: center;
   background-repeat: no-repeat;
 }
+
+
+
+/* ==========================================================
+   CONTACTO – DÓNDE ENCONTRARNOS
+========================================================== */
+
+.encuentranos{
+  padding: 190px 0;
+}
+
+.encuentranos-grid{
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: 70px;
+  align-items: center;
+}
+
+.encuentranos-kicker{
+  font-size: .9rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: #0ea5a4;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
+.encuentranos-title{
+  font-size: clamp(2rem, 2.4vw, 2.6rem);
+  line-height: 1.1;
+  font-weight: 800;   /* más gordo */
+  letter-spacing: -0.5px; /* opcional, más compacto y premium */
+}
+
+.encuentranos-line{
+  width: 64px;
+  height: 3px;
+  background: #0ea5a4;
+  border-radius: 99px;
+  margin-bottom: 18px;
+}
+
+.encuentranos-text{
+  color: rgba(0,0,0,.72);
+  line-height: 1.75;
+  margin: 0 0 14px;
+}
+
+.encuentranos-list{
+  list-style: none;
+  padding: 0;
+  margin: 24px 0 30px;
+  display: grid;
+  gap: 18px;
+}
+
+.encuentranos-list li{
+  display: grid;
+  grid-template-columns: 26px 1fr;
+  gap: 14px;
+  align-items: start;
+}
+
+.encuentranos-list .ico{
+  font-size: 18px;
+  line-height: 1.2;
+}
+
+.item-content{
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.item-content strong{
+  font-weight: 700;
+}
+
+.item-content span{
+  line-height: 1.6;
+  color: rgba(0,0,0,.75);
+}
+
+.item-content a{
+  text-decoration: none;
+  color: inherit;
+  border-bottom: 1px solid rgba(14,165,164,.35);
+}
+
+.item-content a:hover{
+  border-bottom-color: #0ea5a4;
+}
+
+.encuentranos-btn{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  padding: 12px 18px;
+  border-radius: 12px;
+
+  background: #0ea5a4;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 800;
+
+  box-shadow: 0 14px 30px rgba(14,165,164,.25);
+  transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+}
+
+.encuentranos-btn:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 18px 40px rgba(14,165,164,.33);
+  background: #0c9392;
+}
+
+.encuentranos-media{
+  border-radius: 10px; /* menos redondeado */
+  overflow: hidden;
+  box-shadow: 0 18px 50px rgba(0,0,0,.10);
+  background: #f5f5f5; /* fondo neutro por si sobra espacio */
+}
+
+.encuentranos-media img{
+  width: 100%;
+  height: auto;        /* importante */
+  display: block;
+  object-fit: contain; /* asegura que no se recorte */
+}
+
+/* Responsive */
+@media (max-width: 980px){
+  .encuentranos{
+    padding: 70px 0;
+  }
+  .encuentranos-grid{
+    grid-template-columns: 1fr;
+    gap: 34px;
+  }
+  .encuentranos-media img{
+    height: 360px;
+  }
+}
+
+.encuentranos,
+.encuentranos * {
+  font-family: inherit;
+}
+
+/* ==========================================================
+   CONTACTO – H2 MÁS POTENTES (igual que "Dónde encontrarnos")
+========================================================== */
+
+.contacto-section h2{
+  font-weight: 800;
+  font-size: clamp(2rem, 2.4vw, 2.6rem);
+  line-height: 1.1;
+  letter-spacing: -0.5px;
+  margin: 0 0 14px;
+}
+
+
+/* ==========================================================
+   CONTACTO – FONDO CLARO MINIMAL
+========================================================== */
+
+.contacto-section{
+  background: #f8f8f8;   /* gris muy suave */
+  padding: 120px 0;
+}
+
+/* =================================
+   CONTACTO – Espaciado cabeceras
+   ================================= */
+
+/* Cabecera principal del bloque */
+.contacto-info h2,
+.contacto-form h2{
+  margin-bottom: 32px;   /* antes suele estar en 16-20px */
+}
+
+/* Subtítulos (Dirección, Teléfono, Email, Horario) */
+.contacto-item h3{
+  margin-top: 26px;
+  margin-bottom: 10px;
+}
+
+/* Primera cabecera que no tenga margen superior extra */
+.contacto-item:first-child h3{
+  margin-top: 0;
+}
+
+
+/* =================================
+   REDES SOCIALES – Cabecera más potente
+   ================================= */
+
+.redes-title{
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;        /* más gruesa */
+  font-size: 2.4rem;       /* más grande */
+  letter-spacing: -0.5px;
+  margin-bottom: 22px;
+}
+
+/* Texto descriptivo más equilibrado */
+.redes-text{
+  max-width: 720px;
+  margin: 0 auto 40px auto;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #555;
+}

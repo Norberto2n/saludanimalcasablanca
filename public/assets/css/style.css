@@ -25,11 +25,13 @@
 html{ scroll-behavior: smooth; }
 
 body{
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-family: "Nunito", sans-serif;
   line-height: 1.5;
   color: #1f2937;
   background: #ffffff;
 }
+
+
 
 
 /* =========================
@@ -710,3 +712,26 @@ ul{ list-style: none; }
   font-weight: 600;
   color: #0ea5a4;
 }
+
+
+/* ===========================
+   MAPA FULL – sin huecos
+   =========================== */
+.map-full{
+  margin: 0 0 150px 0;   /* ← margen SOLO debajo */
+  padding: 0 !important;
+  line-height: 0;          /* evita espacios raros por baseline */
+  
+
+}
+
+/* El iframe por defecto es inline: lo pasamos a block */
+.map-full iframe{
+  display: block;
+  width: 100%;
+  height: 540px;           /* ajusta a gusto */
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
