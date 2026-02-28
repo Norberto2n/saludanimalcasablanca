@@ -42,16 +42,6 @@
 }
 
 /* ==========================================================
-   (OPCIONAL) Si NO usas page-hero en ninguna página,
-   puedes borrar estos estilos antiguos para evitar conflictos:
-
-   .page-hero { ... }
-   .page-hero-instalaciones { ... }
-
-   Si prefieres no borrarlos todavía, déjalos comentados.
-========================================================== */
-
-/* ==========================================================
    INTRO INSTALACIONES (estilo hero)
 ========================================================== */
 
@@ -69,7 +59,6 @@
   margin-bottom: 22px;
   font-family: 'Nunito', sans-serif;
   font-weight: 800;
-
   font-size: clamp(28px, 3.2vw, 46px);
   line-height: 1.1;
 }
@@ -77,91 +66,67 @@
 .instalaciones-intro p{
   font-family: 'Nunito', sans-serif;
   font-weight: 400;
-
   font-size: clamp(16px, 1.2vw, 20px);
   line-height: 1.6;
-
   color: rgba(17,24,39,0.75);
 }
 
 
-/* Promo ocupando columna 1 y 2 */
-.promo-wrap-left{
-  grid-column: 1 / 3;   /* ocupa col 1 y 2 */
-  align-self: stretch;
-}
+/* ==========================================================
+   PROMO — PEGADO (texto + imagen muy juntos, estilo ejemplo)
+   Funciona dentro de .instalaciones-grid (3 columnas)
+========================================================== */
 
-.promo-wrap-left .promo-inner{
-    max-width: 100%;
-  margin: 0;
-
-  display: grid;
-  grid-template-columns: 1.10fr 0.60fr;
-  gap: 8px;
-  align-items: center;
-}
-
-
-.promo-wrap-left .promo-hero-img{
-  width: 280px;
-  max-width: 100%;
-  right: 290px;
-}
-
-.promo-wrap-left .promo-left{
-  position: relative;
-  z-index: 2;
-  left: 0px;
-}
-
-
-
-/* =========================
-   PROMO BLOCK (flotante, sin cápsula)
-   - Ocupa 2 columnas en tu grid de instalaciones
-   - Imagen compuesta a la derecha (sin burbujas CSS)
-   - Texto con estilo (título + highlight + botón)
-========================= */
-
-/* Wrapper en tu grid 3 columnas: ocupa col 2 y 3 */
+/* Wrappers en tu grid */
 .promo-wrap{
-  grid-column: 2 / 4;
+  grid-column: 2 / 4;   /* ocupa col 2-3 */
+  align-self: stretch;
+}
+.promo-wrap-left{
+  grid-column: 1 / 3;   /* ocupa col 1-2 */
   align-self: stretch;
 }
 
-/* Bloque libre */
 .promo-block{
   padding: 0;
   background: transparent;
   overflow: visible;
 }
 
-/* Layout interno (2 columnas: texto / imagen) */
-.promo-inner{
-  max-width: 100%;
-  margin: 0;
-
-  display: grid;
-  grid-template-columns: 1.15fr 0.90fr;
-  gap: 18px;
-  align-items: center;
+/* Ajustables (para afinar en 10s) */
+:root{
+  --promo-img: 520px;        /* tamaño imagen */
+  --promo-anchor: 240px;     /* ancho “ancla” derecha (pequeño) */
+  --promo-overlap: 150px;    /* cuanto entra la imagen hacia el texto */
+  --promo-gap: 6px;          /* separación real */
 }
 
-/* =========================
-   IZQUIERDA (TEXTO)
-========================= */
+/* Layout: 2 columnas, pero la derecha ES ESTRECHA */
+.promo-inner{
+  display: grid;
+  grid-template-columns: minmax(260px, 1fr) var(--promo-anchor);
+  gap: var(--promo-gap);
+  align-items: center;
 
+  max-width: 100%;
+  margin: 0;
+  padding: 0 10px;
+
+  overflow: visible;
+}
+
+/* Texto */
 .promo-left{
   position: relative;
-  z-index: 2; /* por encima de la imagen si se acercan */
-  left: 90px;
+  z-index: 3;              /* por encima de la imagen si se cruzan */
 }
 
 .promo-title{
-  font-size: clamp(28px, 3.6vw, 66px);
+  font-family: 'Nunito', sans-serif;
+  font-size: clamp(28px, 3.2vw, 58px);
   line-height: 1.02;
   letter-spacing: -0.02em;
-  margin: 0 0 16px 100px;
+  margin: 0 0 14px 0;
   color: #2f2f2f;
   font-weight: 800;
 }
@@ -173,167 +138,210 @@
   border-radius: 10px;
   display: inline-block;
   transform: translateY(-2px);
-  
 }
 
 .promo-sub{
-  margin: 0 0 22px 100px;
+  margin: 0 0 18px 0;
   color: #8a8a8a;
-  font-size: 18px;
+  font-size: 17px;
   line-height: 1.6;
+  font-family: 'Nunito', sans-serif;
 }
 
 .promo-btn{
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  margin: 0 0 16px 100px;
+
   background: #0ea5a4;
   color: #fff;
   text-decoration: none;
   font-weight: 800;
   letter-spacing: .2px;
 
-  padding: 14px 26px;
+  padding: 13px 24px;
   border-radius: 8px;
 
-  box-shadow: 0 14px 28px rgba(255,74,61,.22);
+  box-shadow: 0 14px 28px rgba(14,165,164,.22);
   transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
 }
 
 .promo-btn:hover{
   transform: translateY(-2px);
-  box-shadow: 0 18px 34px rgba(255,74,61,.28);
+  box-shadow: 0 18px 34px rgba(14,165,164,.28);
   filter: brightness(1.02);
 }
 
-.promo-btn:active{
-  transform: translateY(0);
-}
+.promo-btn:active{ transform: translateY(0); }
+.promo-btn .paw{ font-size: 18px; }
 
-.promo-btn .paw{
-  font-size: 18px;
-}
-
-/* =========================
-   DERECHA (IMAGEN + DECOS)
-========================= */
-
+/* Derecha: solo “ancla” para colocar la composición */
 .promo-right{
   position: relative;
-  min-height: 420px;  /* importante para que “quepa” la composición */
+  min-height: 360px;
   overflow: visible;
-  z-index: 1;
+  z-index: 2;
 }
 
-/* Imagen compuesta (la generada por IA) */
+/* IMAGEN: más grande que su columna y se mete a la izquierda */
 .promo-hero-img{
   position: absolute;
-  right: 90px;
+  right: 0;
   bottom: 0;
 
-  width: min(520px, 100%);
+  width: var(--promo-img);
   height: auto;
   display: block;
+
+  transform: translateX(calc(-1 * var(--promo-overlap)));
 }
 
-/* Estrellitas decorativas */
+/* Decoraciones */
 .promo-sparkle{
   position: absolute;
   color: #0ea5a4;
   font-size: 22px;
   opacity: .9;
   text-shadow: 0 10px 18px rgba(0,0,0,.08);
-  z-index: 2;
+  z-index: 4;
   pointer-events: none;
 }
+.promo-sparkle.s1{ right: 14px; top: 14px; transform: rotate(12deg); }
+.promo-sparkle.s2{ right: -6px; top: 58px; font-size: 18px; transform: rotate(-8deg); opacity: .75; }
 
-.promo-sparkle.s1{
-  right: 105px;
-  top: 105px;
-  transform: rotate(12deg);
-}
-
-.promo-sparkle.s2{
-  right: 58px;
-  top: 165px;
-  font-size: 18px;
-  transform: rotate(-8deg);
-  opacity: .75;
-}
-
-/* Corazón doodle */
 .promo-heart{
   position: absolute;
-  left: 140px;
-  bottom: 70px;
-
+  left: -10px;
+  bottom: 22px;
   font-size: 44px;
   color: #0ea5a4;
   transform: rotate(-10deg);
   opacity: .95;
-
-  z-index: 2;
+  z-index: 4;
   pointer-events: none;
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
+/* Variante izquierda (un poco más compacta) */
+.promo-wrap-left .promo-inner{
+  --promo-img: 420px;
+  --promo-anchor: 220px;
+  --promo-overlap: 120px;
+}
 
-@media (max-width: 1100px){
+/* Responsive */
+@media (max-width: 1200px){
   .promo-inner{
-    grid-template-columns: 1.2fr 0.8fr;
-    gap: 22px;
+    --promo-anchor: 220px;
+    --promo-overlap: 120px;
   }
-
-  .promo-right{
-    min-height: 380px;
-  }
-
-  .promo-hero-img{
-    width: min(480px, 100%);
-  }
-
-  .promo-heart{
-    left: 110px;
-    bottom: 55px;
-  }
-
-  .promo-sparkle.s1{ right: 90px; top: 95px; }
-  .promo-sparkle.s2{ right: 50px; top: 150px; }
+  .promo-right{ min-height: 320px; }
 }
 
 @media (max-width: 900px){
-  /* Si tu grid de instalaciones baja a 1 columna, el promo ocupa todo */
-  .promo-wrap{
-    grid-column: 1 / -1;
-  }
+  .promo-wrap, .promo-wrap-left{ grid-column: 1 / -1; }
 
   .promo-inner{
     grid-template-columns: 1fr;
-    gap: 18px;
+    gap: 14px;
   }
 
   .promo-right{
-    min-height: 360px;
+    min-height: auto;
   }
 
-  /* centra imagen en móvil */
   .promo-hero-img{
-    right: 50%;
-    transform: translateX(50%);
-    width: min(520px, 95%);
+    position: relative;
+    transform: none;
+    margin: 0 auto;
+    width: min(520px, 92%);
   }
 
-  .promo-heart{
-    left: 35px;
-    bottom: 35px;
-    font-size: 40px;
+  .promo-heart{ left: 18px; bottom: 18px; font-size: 40px; }
+}
+/* =========================
+   Ajuste: mover texto hacia el centro
+========================= */
+
+.promo-inner{
+  --promo-text-shift: 100px;   /* ⬅️ sube/baja esto (40–90 suele ir bien) */
+}
+
+/* mueve el bloque de texto hacia la derecha */
+.promo-left{
+  transform: translateX(var(--promo-text-shift));
+}
+
+/* para que no “choque” en pantallas medias, reduce el desplazamiento */
+@media (max-width: 1200px){
+  .promo-inner{ --promo-text-shift: 30px; }
+}
+
+/* en tablet/móvil no desplazar */
+@media (max-width: 900px){
+  .promo-left{ transform: none; }
+}
+
+/* =========================
+   Ajuste vertical imagen
+========================= */
+
+.promo-inner{
+  --promo-img-down: 80px;   /* ⬅️ ajusta aquí */
+}
+
+.promo-hero-img{
+  bottom: calc(-1 * var(--promo-img-down));
+}
+
+/* en pantallas medias reduce un poco */
+@media (max-width: 1200px){
+  .promo-inner{ --promo-img-down: 25px; }
+}
+
+/* en móvil quitar desplazamiento */
+@media (max-width: 900px){
+  .promo-hero-img{ bottom: auto; }
+}
+
+/* =========================
+   MÓVIL / TABLET — centrar todo
+========================= */
+
+@media (max-width: 900px){
+
+  .promo-inner{
+    grid-template-columns: 1fr;
+    justify-items: center;     /* centra contenido horizontalmente */
+    text-align: center;        /* centra texto */
+    gap: 18px;
   }
 
-  .promo-sparkle.s1{ right: 70px; top: 95px; }
-  .promo-sparkle.s2{ right: 40px; top: 150px; }
+  .promo-left{
+    transform: none;           /* elimina desplazamientos */
+    max-width: 600px;
+  }
+
+  .promo-title,
+  .promo-sub{
+    text-align: center;
+  }
+
+  .promo-btn{
+    margin: 0 auto;            /* centra botón */
+  }
+
+  .promo-right{
+    justify-content: center;
+    align-items: center;
+  }
+
+  .promo-hero-img{
+    position: relative;
+    transform: none;           /* elimina overlap */
+    margin: 0 auto;
+    display: block;
+  }
+
 }
 
 
