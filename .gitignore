@@ -4,4 +4,8 @@ desktop.ini
 *.log
 node_modules/
 .vscode/
-public/config.local.php
+
+
+# Local secrets
+config.local.php
+**/config.local.php
