@@ -2561,3 +2561,167 @@
     overflow: visible;
   }
 }
+
+/* Botón hamburguesa */
+#menuToggle{
+  background: #0c9392 !important;
+  border: none !important;
+  color: #fff !important;
+}
+
+/* Icono dentro (Material Symbols) */
+#menuToggle .material-symbols-outlined{
+  color: #fff !important;
+  font-size: 28px;
+}
+
+/* Logo más pequeño en móviles */
+@media (max-width: 768px){
+
+  .site-header img{
+    height: 72px !important;
+    width: auto;
+  }
+
+}
+
+/* ============================
+   OFFCANVAS ESTABLE (móvil)
+============================ */
+@media (max-width: 768px){
+
+  body.nav-open{ overflow: hidden; }
+
+  /* Overlay REAL */
+  #navOverlay{
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.60);
+    z-index: 10040;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .2s ease;
+  }
+  body.nav-open #navOverlay{
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* Panel */
+  #mainNav{
+    position: fixed !important;
+    top: 0 !important;
+    right: 0 !important;
+    left: auto !important;
+    height: 100vh !important;
+    width: min(360px, 86vw) !important;
+
+    background: #0f0f10 !important;
+    color: #fff !important;
+
+    z-index: 10041 !important;
+    transform: translateX(105%) !important;
+    transition: transform .28s ease !important;
+
+    overflow-y: auto !important;
+    padding: 18px 16px !important;
+
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+
+  body.nav-open #mainNav{
+    transform: translateX(0) !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+  }
+
+  /* Estilo items */
+  #mainNav ul{ margin: 0; padding: 0; list-style: none; }
+  #mainNav li{ border-bottom: 1px solid rgba(255,255,255,.08); }
+
+  #mainNav a{
+    display: block;
+    padding: 16px 12px !important;
+    color: rgba(255,255,255,.85) !important;
+    text-decoration: none !important;
+    background: transparent !important;
+    border: 0 !important;
+    text-transform: uppercase;
+    letter-spacing: .10em;
+    font-weight: 700;
+  }
+}
+
+/* ============================
+   RESET TOTAL (desktop/tablet)
+   evita “cosas raras” al scroll/resize
+============================ */
+@media (min-width: 769px){
+
+  body.nav-open{ overflow: auto; }
+
+  #navOverlay{ display: none !important; }
+
+  #mainNav{
+    position: static !important;
+    width: auto !important;
+    height: auto !important;
+    transform: none !important;
+    transition: none !important;
+    background: transparent !important;
+    color: inherit !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    overflow: visible !important;
+    padding: 0 !important;
+    z-index: auto !important;
+  }
+}
+
+/* =========================
+   DISEÑO MENÚ MÓVIL BLANCO
+========================= */
+@media (max-width:768px){
+
+  /* panel blanco */
+  #mainNav{
+    background:#ffffff !important;
+    color:#1f2937 !important;
+    box-shadow:-20px 0 50px rgba(0,0,0,.15);
+  }
+
+  /* quitar flechas si existen */
+  #mainNav .submenu-toggle,
+  #mainNav .arrow,
+  #mainNav .dropdown-icon{
+    display:none !important;
+  }
+
+  /* lista */
+  #mainNav ul{
+    margin:40px 0 0;
+    padding:0;
+  }
+
+  /* separadores suaves */
+  #mainNav li{
+    border-bottom:1px solid #ececec;
+  }
+
+  /* enlaces */
+  #mainNav a{
+    padding:18px 16px !important;
+    color:#111827 !important;
+    font-weight:600;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    font-size:15px;
+  }
+
+  #mainNav a:hover{
+    color:#1fb6a6 !important; /* tu color veterinaria */
+  }
+
+}
+

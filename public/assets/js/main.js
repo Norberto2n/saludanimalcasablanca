@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
     activarLinkActivo();
     activarBackToTop();
     activarPawHover(); // ✅ EFECTO PAWFRIENDS
+    prepararUIOffcanvas(); // ✅ AÑADE ESTA LÍNEA
   });
 
   // ===== CARGAR FOOTER =====
@@ -266,3 +267,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
   mo.observe(document.body, { childList: true, subtree: true });
 });
+
+
+document.addEventListener("click", (e) => {
+  const btn = e.target.closest("#menuToggle");
+  if (btn) {
+    document.body.classList.toggle("nav-open");
+  }
+
+  // cerrar tocando fuera (overlay)
+  if (document.body.classList.contains("nav-open")) {
+    const nav = document.getElementById("mainNav");
+    if (nav && !nav.contains(e.target) && !btn) {
+      document.body.classList.remove("nav-open");
+    }
+  }
+});
+
