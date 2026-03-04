@@ -2528,3 +2528,36 @@
   line-height: 1.7;
   color: #555;
 }
+
+@media (max-width: 768px){
+
+  .site-header .header-top{
+    height: 30px;
+    min-height: 30px;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  /* Oculta TODO el contenido interno (texto, iconos, links, etc.) */
+  .site-header .header-top > *{
+    display: none !important;
+  }
+
+}
+
+
+
+/* 📟 Tablets / Surface Pro / iPad: desplazar menú a la izquierda */
+@media (min-width: 769px) and (max-width: 1024px){
+
+  .main-nav{
+    position: relative;
+    transform: translateX(-60px) scale(.96); /* 👈 mueve bastante a la izquierda */
+    transform-origin: right center;
+  }
+
+  /* por si el contenedor recorta */
+  .site-header{
+    overflow: visible;
+  }
+}
