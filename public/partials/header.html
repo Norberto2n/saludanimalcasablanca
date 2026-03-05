@@ -9,34 +9,21 @@
   <div class="header-top" role="banner">
     <div class="container header-top-container">
 
-        <!-- IZQUIERDA -->
-        <div class="top-left">
+      <!-- IZQUIERDA -->
+      <div class="top-left">
+        <a class="top-item">
+          <span class="top-icon material-symbols-outlined" aria-hidden="true">location_pin</span>
+          C/ Embarcadero 26 ( Zaragoza )
+        </a>
 
-          <!-- Dirección -->
-         
-
-            <a class="top-item">
-            <span class="top-icon material-symbols-outlined" aria-hidden="true">location_pin</span>
-            C/ Embarcadero 26 ( Zaragoza ) 
-          </a>
-
-        
-
-
-
-
-          <!-- Enlace extra -->
-          <a class="top-item" href="picture-of-the-day.html">
-            <span class="top-icon material-symbols-outlined" aria-hidden="true">photo_camera</span>
-            Picture Of The Day
-          </a>
-
-        </div>
-
+        <a class="top-item" href="picture-of-the-day.html">
+          <span class="top-icon material-symbols-outlined" aria-hidden="true">photo_camera</span>
+          Picture Of The Day
+        </a>
+      </div>
 
       <!-- DERECHA -->
       <div class="top-right">
-
         <a class="top-item" href="tel:+34976568622">
           <span class="top-icon material-symbols-outlined" aria-hidden="true">phone</span>
           (+34) 976 56 86 22
@@ -46,12 +33,10 @@
           <span class="top-icon material-symbols-outlined" aria-hidden="true">mail</span>
           info@saludanimalcasablanca.es
         </a>
-        
       </div>
 
     </div>
   </div>
-
 
   <!-- =========================
        HEADER PRINCIPAL
@@ -66,19 +51,19 @@
         </a>
       </div>
 
-      <!-- BOTÓN MENÚ MÓVIL -->
+      <!-- BOTÓN MENÚ MÓVIL (solo visible <=992px por CSS) -->
       <button
         class="menu-toggle"
         id="menuToggle"
         aria-label="Abrir menú"
-        aria-controls="mainNav"
+        aria-controls="mnavPanel"
         aria-expanded="false"
         type="button"
       >
         ☰
       </button>
 
-      <!-- NAVEGACIÓN -->
+      <!-- NAVEGACIÓN ESCRITORIO (se mantiene) -->
       <nav class="main-nav" id="mainNav" aria-label="Navegación principal">
         <div class="nav-inner">
           <ul>
@@ -91,9 +76,61 @@
           </ul>
         </div>
       </nav>
-      
 
     </div>
   </div>
+
+  <!-- =======================================================
+       MENÚ MÓVIL DEDICADO (NO TOCA EL NAV DE ESCRITORIO)
+       - overlay: .mnav-mask
+       - panel:   #mnavPanel.mnav-panel
+  ======================================================== -->
+  <div class="mnav-mask" hidden></div>
+
+  <aside class="mnav-panel" id="mnavPanel" hidden aria-hidden="true">
+    <div class="mnav-header">
+      <a href="index.html" class="mnav-logo" aria-label="Ir a inicio">
+        <img src="assets/img/logo/logo.png" alt="SaludAnimal Casablanca">
+      </a>
+      <button class="mnav-close" type="button" aria-label="Cerrar menú" title="Cerrar">×</button>
+    </div>
+
+    <div class="mnav-inner">
+      <nav aria-label="Navegación principal (móvil)">
+        <ul class="mnav-list">
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="quienes_somos.html">Quienes Somos</a></li>
+          <li><a href="instalaciones.html">Instalaciones</a></li>
+          <li><a href="servicios.html">Servicios</a></li>
+          <li><a href="galeria.html">Galería</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+      </nav>
+
+      <!-- Datos abajo -->
+      <div class="mnav-extra">
+        <p class="mnav-line">
+          <span class="material-symbols-outlined" aria-hidden="true">location_pin</span>
+          C/ Embarcadero 26 ( Zaragoza )
+        </p>
+
+        <p class="mnav-line">
+          <span class="material-symbols-outlined" aria-hidden="true">phone</span>
+          <a href="tel:+34976568622">(+34) 976 56 86 22</a>
+        </p>
+
+        <p class="mnav-line">
+          <span class="material-symbols-outlined" aria-hidden="true">mail</span>
+          <a href="mailto:info@saludanimalcasablanca.es">info@saludanimalcasablanca.es</a>
+        </p>
+
+        <div class="mnav-social" aria-label="Redes sociales">
+          <!-- Pon aquí tus URLs reales -->
+          <a href="#" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
+          <a href="#" target="_blank" rel="noopener" aria-label="Facebook">FB</a>
+        </div>
+      </div>
+    </div>
+  </aside>
 
 </header>
