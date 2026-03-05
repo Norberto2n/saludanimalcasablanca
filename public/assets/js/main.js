@@ -282,44 +282,72 @@ function activarHeaderScroll() {
 // - Móvil:   #mnavPanel .mnav-list a.is-active + aria-current
 // ==========================================================
 function activarLinkActivo() {
-  const currentPath = (window.location.pathname.split("/").pop() || "index.html").split("?")[0].split("#")[0];
-  const current = decodeURIComponent(currentPath || "index.html");
+
+  let currentPath = window.location.pathname.split("/").pop();
+  currentPath = (currentPath || "index.html").split("?")[0].split("#")[0];
+
+  // normalizar inicio
+  if (currentPath === "" || currentPath === "/") {
+    currentPath = "index.html";
+  }
+
+  const current = decodeURIComponent(currentPath);
 
   // ----- Desktop -----
   const navDesktop = document.querySelector("nav.main-nav#mainNav");
   if (navDesktop) {
+
     const links = navDesktop.querySelectorAll("a[href]");
     links.forEach(a => a.classList.remove("active"));
 
     links.forEach(a => {
-      const href = (a.getAttribute("href") || "").split("?")[0].split("#")[0];
-      const target = (href.split("/").pop() || "index.html");
-      if (target === current) a.classList.add("active");
+
+      let href = (a.getAttribute("href") || "").split("?")[0].split("#")[0];
+      let target = href.split("/").pop() || "index.html";
+
+      if (target === "" || target === "/") {
+        target = "index.html";
+      }
+
+      if (target === current) {
+        a.classList.add("active");
+      }
+
     });
+
   }
 
   // ----- Móvil dedicado -----
   const panel = document.getElementById("mnavPanel");
   if (panel) {
+
     const links = panel.querySelectorAll("a[href]");
+
     links.forEach(a => {
       a.classList.remove("is-active");
       a.removeAttribute("aria-current");
     });
 
-    // marca el primero que coincida
     for (const a of links) {
-      const href = (a.getAttribute("href") || "").split("?")[0].split("#")[0];
-      const target = (href.split("/").pop() || "index.html");
+
+      let href = (a.getAttribute("href") || "").split("?")[0].split("#")[0];
+      let target = href.split("/").pop() || "index.html";
+
+      if (target === "" || target === "/") {
+        target = "index.html";
+      }
+
       if (target === current) {
         a.classList.add("is-active");
         a.setAttribute("aria-current", "page");
         break;
       }
-    }
-  }
-}
 
+    }
+
+  }
+
+}
 
 // ==========================================================
 // AÑO AUTOMÁTICO FOOTER
