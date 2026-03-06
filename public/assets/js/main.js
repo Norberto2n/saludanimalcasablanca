@@ -278,77 +278,69 @@ function activarHeaderScroll() {
 
 // ==========================================================
 // LINK ACTIVO (desktop + móvil dedicado)
-// - Desktop: nav#mainNav a.active
-// - Móvil:   #mnavPanel .mnav-list a.is-active + aria-current
 // ==========================================================
 function activarLinkActivo() {
 
-  let currentPath = window.location.pathname.split("/").pop();
-  currentPath = (currentPath || "index.html").split("?")[0].split("#")[0];
+  // nombre de la página actual
+  let page = window.location.pathname.split("/").pop();
 
-  // normalizar inicio
-  if (currentPath === "" || currentPath === "/") {
-    currentPath = "index.html";
+  if (!page || page === "") {
+    page = "index.html";
   }
 
-  const current = decodeURIComponent(currentPath);
+  // ----- DESKTOP -----
+  const navDesktop = document.querySelector("#mainNav");
 
-  // ----- Desktop -----
-  const navDesktop = document.querySelector("nav.main-nav#mainNav");
   if (navDesktop) {
 
     const links = navDesktop.querySelectorAll("a[href]");
-    links.forEach(a => a.classList.remove("active"));
 
-    links.forEach(a => {
+    links.forEach(link => {
 
-      let href = (a.getAttribute("href") || "").split("?")[0].split("#")[0];
-      let target = href.split("/").pop() || "index.html";
+      link.classList.remove("active");
 
-      if (target === "" || target === "/") {
-        target = "index.html";
+      let href = link.getAttribute("href");
+
+      if (href === "/" || href === "") {
+        href = "index.html";
       }
 
-      if (target === current) {
-        a.classList.add("active");
+      if (href === page) {
+        link.classList.add("active");
       }
 
     });
 
   }
 
-  // ----- Móvil dedicado -----
-  const panel = document.getElementById("mnavPanel");
+  // ----- MENÚ MÓVIL -----
+  const panel = document.querySelector("#mnavPanel");
+
   if (panel) {
 
     const links = panel.querySelectorAll("a[href]");
 
-    links.forEach(a => {
-      a.classList.remove("is-active");
-      a.removeAttribute("aria-current");
+    links.forEach(link => {
+
+      link.classList.remove("is-active");
+      link.removeAttribute("aria-current");
+
+      let href = link.getAttribute("href");
+
+      if (href === "/" || href === "") {
+        href = "index.html";
+      }
+
+      if (href === page) {
+        link.classList.add("is-active");
+        link.setAttribute("aria-current","page");
+      }
+
     });
-
-    for (const a of links) {
-
-      let href = (a.getAttribute("href") || "").split("?")[0].split("#")[0];
-      let target = href.split("/").pop() || "index.html";
-
-      if (target === "" || target === "/") {
-        target = "index.html";
-      }
-
-      if (target === current) {
-        a.classList.add("is-active");
-        a.setAttribute("aria-current", "page");
-        break;
-      }
-
-    }
 
   }
 
 }
-
 // ==========================================================
 // AÑO AUTOMÁTICO FOOTER
 // ==========================================================
