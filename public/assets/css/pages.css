@@ -3338,3 +3338,56 @@ section.hero h3{
 }
 
 }
+
+
+
+/* =====================================
+   ESPACIO ENTRE BLOQUES DE SERVICIOS
+===================================== */
+
+.servicios-pro{
+  padding: 60px 0;
+}
+
+.servicios-intro{
+  margin-top: 80px;
+  margin-bottom: 70px;
+}
+
+.servicios-bloque-pro{
+  margin-bottom: 400px;
+}
+
+/* =====================================
+   SEPARADOR ENTRE BLOQUES SERVICIOS
+===================================== */
+
+.servicios-bloque-pro{
+  position: relative;
+  margin-bottom: 190px;
+}
+
+/* línea decorativa */
+.servicios-bloque-pro::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  bottom:-60px;
+  transform:translateX(-50%);
+  width:120px;
+  height:2px;
+
+  background:linear-gradient(
+    90deg,
+    transparent,
+    #0b5ed7,
+    transparent
+  );
+
+  opacity:0.35;
+}
+
+.servicios-bloque-pro:last-of-type::after{
+  display:none;
+}
+
