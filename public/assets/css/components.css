@@ -1179,3 +1179,43 @@
     padding: 14px 18px;
   }
 }
+
+
+/* =========================================
+   MENSAJE FORMULARIO
+========================================= */
+
+
+.form-response{
+  display: none;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.form-response.show{
+  display: block;
+}
+
+.form-response.success{
+  background: #eaf8f2;
+  color: #1f6f50;
+  border: 1px solid #b7e4cf;
+}
+
+.form-response.error{
+  background: #fff1f0;
+  color: #b42318;
+  border: 1px solid #f5c2c0;
+}
+
+.form-honeypot{
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}

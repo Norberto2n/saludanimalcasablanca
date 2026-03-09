@@ -128,33 +128,46 @@
     <div class="contacto-form fade-in">
       <h2>Envíanos un mensaje</h2>
 
-      <form action="api/send.php" method="POST" id="contactForm">
+      <form action="contacto-enviar.php" method="POST" id="contactForm">
 
-        <div class="form-group">
-          <label for="nombre">Nombre</label>
-          <input type="text" id="nombre" name="nombre" required>
-        </div>
+      
 
-        <div class="form-group">
-          <label for="email">Correo electrónico</label>
-          <input type="email" id="email" name="email" required>
-        </div>
+      <!-- Honeypot anti-bots -->
+      <div class="form-honeypot" aria-hidden="true">
+        <label for="website">No rellenar este campo</label>
+        <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+      </div>
+      
+      <input type="hidden" name="form_time" id="form_time" value="">
+      
 
-        <div class="form-group">
-          <label for="asunto">Asunto</label>
-          <input type="text" id="asunto" name="asunto" required>
-        </div>
+      <div class="form-group">
+        <label for="nombre">Nombre</label>
+        <input type="text" id="nombre" name="nombre" required>
+      </div>
 
-        <div class="form-group">
-          <label for="mensaje">Mensaje</label>
-          <textarea id="mensaje" name="mensaje" rows="5" required></textarea>
-        </div>
+      <div class="form-group">
+        <label for="email">Correo electrónico</label>
+        <input type="email" id="email" name="email" required>
+      </div>
 
-        <button type="submit" class="btn-primary">
-          Enviar mensaje
-        </button>
+      <div class="form-group">
+        <label for="asunto">Asunto</label>
+        <input type="text" id="asunto" name="asunto" required>
+      </div>
 
-      </form>
+      <div class="form-group">
+        <label for="mensaje">Mensaje</label>
+        <textarea id="mensaje" name="mensaje" rows="5" required></textarea>
+      </div>
+
+      <div id="form-response" class="form-response" aria-live="polite"></div>
+
+      <button type="submit" class="btn-primary">
+        Enviar mensaje
+      </button>
+
+    </form>
     </div>
   </section>
 
@@ -176,6 +189,8 @@
 
 <script src="assets/js/main.js"></script>
 <script src="assets/js/scroll-animations.js"></script>
+<script src="assets/js/contact.js"></script>
+
 
 </body>
 </html>
