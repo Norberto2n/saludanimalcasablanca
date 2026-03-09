@@ -12,10 +12,8 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   form.addEventListener("submit", async function (e) {
-
     e.preventDefault();
 
-    // bloquear botón
     if (submitBtn) {
       submitBtn.disabled = true;
       submitBtn.dataset.originalText = submitBtn.textContent;
@@ -28,16 +26,20 @@ document.addEventListener("DOMContentLoaded", function () {
     const formData = new FormData(form);
 
     try {
-
       const res = await fetch(form.action, {
         method: "POST",
         body: formData
       });
 
-      const data = await res.json();
+      let data;
 
-      if (data.ok) {
+      try {
+        data = await res.json();
+      } catch {
+        throw new Error("Respuesta no válida del servidor");
+      }
 
+      if (res.ok && data.ok) {
         responseBox.textContent = "✔ Mensaje enviado correctamente";
         responseBox.className = "form-response show success";
 
@@ -46,32 +48,25 @@ document.addEventListener("DOMContentLoaded", function () {
         if (timeField) {
           timeField.value = Math.floor(Date.now() / 1000);
         }
-
       } else {
-
         responseBox.textContent = data.message || "Error al enviar el mensaje";
         responseBox.className = "form-response show error";
-
       }
 
     } catch (error) {
-
       responseBox.textContent = "Error de conexión. Inténtalo de nuevo.";
       responseBox.className = "form-response show error";
-
     }
 
-    // restaurar botón
     if (submitBtn) {
       submitBtn.disabled = false;
       submitBtn.textContent = submitBtn.dataset.originalText || "Enviar mensaje";
     }
 
-    // ocultar mensaje en 5 segundos
     setTimeout(() => {
       responseBox.className = "form-response";
+      responseBox.textContent = "";
     }, 5000);
-
   });
 
 });
