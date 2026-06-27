@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // ===== CARGAR FOOTER =====
-  cargar("partials/footer.html", "footer", () => {
+  cargar("partials/footer.html?v=2", "footer", () => {
     ponerAnioActual();
     activarBackToTop();
   });
